@@ -1,7 +1,7 @@
-<!-- Main entry point — redirects to converter -->
 <!doctype html>
 <html lang="en">
   <head>
+    <meta name="google-adsense-account" content="ca-pub-4608381042047290" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
@@ -9,20 +9,1366 @@
     </title>
     <meta
       name="description"
-      content="Convert Markdown (.md) files to EPUB format instantly — free, private, no upload required. Works 100% in your browser. Perfect for Kindle, Kobo, and all e-readers."
+      content="Convert Markdown (.md) files to EPUB format instantly — free, private, no upload required. Works 100% in your browser. Perfect for Kindle, Kobo, and all e-readers. Drag & drop or paste your Markdown and download a ready-to-read EPUB ebook."
+    />
+    <meta
+      name="keywords"
+      content="markdown to epub, md to epub, markdown to kindle, convert markdown to ebook, free epub converter, markdown epub online, markdown to ebook converter, md to kindle, epub generator, markdown converter free, online epub creator"
+    />
+    <meta name="author" content="Markdown to EPUB" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0e0e0f" />
+    <meta
+      property="og:title"
+      content="Markdown to EPUB Converter — Free Online Tool"
+    />
+    <meta
+      property="og:description"
+      content="Convert Markdown to EPUB for Kindle & e-readers — free, private, runs entirely in your browser. No upload, no server, no signup."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mdtoepub.com/" />
+    <meta property="og:site_name" content="Markdown to EPUB" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Markdown to EPUB Converter — Free Online Tool"
+    />
+    <meta
+      name="twitter:description"
+      content="Convert Markdown to EPUB for Kindle instantly. Free, private, no data leaves your browser."
     />
     <link rel="canonical" href="https://mdtoepub.com/" />
-    <meta http-equiv="refresh" content="0; url=md_to_epub.html" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230e0e0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='48' font-weight='bold' fill='%23e8c97e'%3EE%3C/text%3E%3C/svg%3E"
+    />
+    <meta property="og:image" content="https://mdtoepub.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:image" content="https://mdtoepub.com/og-image.png" />
+
+    <!-- Structured Data: WebApplication -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Markdown to EPUB Converter",
+        "url": "https://mdtoepub.com/",
+        "description": "Convert Markdown files to EPUB format instantly in your browser. Free, private, no server needed. Perfect for Kindle and e-readers.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any (browser-based)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+        "featureList": [
+          "Convert Markdown to EPUB",
+          "Drag and drop .md files",
+          "Live Markdown preview",
+          "Custom metadata (title, author, language)",
+          "100% browser-based — no data sent to servers",
+          "Kindle-optimized EPUB output",
+          "Support for GFM (GitHub Flavored Markdown)"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I convert Markdown to EPUB?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Paste or drag your Markdown (.md) file into the editor, optionally set the title, author, and language, then click 'Generate EPUB'. The EPUB file downloads instantly — no account or upload needed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this Markdown to EPUB converter free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, it is 100% free with no limits. There is no signup, no watermark, and no file size restrictions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does my data stay private?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Everything runs in your browser using JavaScript. No data is ever uploaded to a server. Your files never leave your device."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I read the EPUB on Kindle?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Kindle devices and the Kindle app support EPUB files. You can send the EPUB to your Kindle via email (Send to Kindle) or USB."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What Markdown features are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The converter supports GitHub Flavored Markdown (GFM) including headings, bold, italic, links, images, code blocks, tables, blockquotes, and lists."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Markdown to EPUB Converter",
+            "item": "https://mdtoepub.com/"
+          }
+        ]
+      }
+    </script>
+    <!-- Google AdSense -->
+    <!-- STEP 1: Replace ca-pub-XXXXXXXX with your AdSense publisher ID -->
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0e0e0f;
+        --surface: #161618;
+        --surface2: #1e1e21;
+        --border: #2a2a2e;
+        --accent: #e8c97e;
+        --accent2: #7eb8e8;
+        --text: #e8e6e0;
+        --muted: #7a7870;
+        --success: #6ec97e;
+        --radius: 6px;
+      }
+
+      html,
+      body {
+        height: 100%;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Source Serif 4", serif;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      /* — Layout — */
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+      }
+      .logo span {
+        color: var(--muted);
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      .badge {
+        margin-left: auto;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+      }
+
+      /* — Panels — */
+      .panel {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .panel + .panel {
+        border-left: 1px solid var(--border);
+      }
+
+      .panel-header {
+        padding: 0.75rem 1.25rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--surface);
+        position: sticky;
+        top: 0;
+        z-index: 2;
+      }
+
+      .panel-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+      }
+
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+        flex-shrink: 0;
+      }
+      .dot.blue {
+        background: var(--accent2);
+      }
+
+      /* — Editor — */
+      .editor-wrap {
+        position: relative;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      #editor {
+        flex: 1;
+        width: 100%;
+        min-height: 400px;
+        background: var(--bg);
+        color: var(--text);
+        border: none;
+        outline: none;
+        resize: none;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82rem;
+        line-height: 1.75;
+        padding: 1.5rem 1.25rem;
+        caret-color: var(--accent);
+      }
+      #editor::placeholder {
+        color: var(--muted);
+      }
+
+      /* — Drop zone overlay — */
+      .drop-overlay {
+        display: none;
+        position: absolute;
+        inset: 0;
+        background: rgba(232, 201, 126, 0.06);
+        border: 2px dashed var(--accent);
+        border-radius: var(--radius);
+        z-index: 10;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5rem;
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        color: var(--accent);
+      }
+      .drop-overlay.active {
+        display: flex;
+      }
+
+      /* — Preview — */
+      #preview {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.5rem 1.75rem;
+        background: var(--bg);
+      }
+
+      /* Markdown preview styles */
+      #preview h1,
+      #preview h2,
+      #preview h3,
+      #preview h4 {
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin: 1.5em 0 0.5em;
+        line-height: 1.2;
+      }
+      #preview h1 {
+        font-size: 1.6rem;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 0.4em;
+      }
+      #preview h2 {
+        font-size: 1.25rem;
+      }
+      #preview h3 {
+        font-size: 1.05rem;
+        color: var(--accent2);
+      }
+      #preview p {
+        margin: 0.75em 0;
+        color: var(--text);
+      }
+      #preview a {
+        color: var(--accent2);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      #preview code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8em;
+        background: var(--surface2);
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+        color: var(--accent);
+      }
+      #preview pre {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1em 0;
+      }
+      #preview pre code {
+        background: none;
+        padding: 0;
+      }
+      #preview blockquote {
+        border-left: 3px solid var(--accent);
+        margin: 1em 0;
+        padding: 0.5em 1em;
+        color: var(--muted);
+        font-style: italic;
+        background: var(--surface);
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+      #preview ul,
+      #preview ol {
+        padding-left: 1.5em;
+        margin: 0.75em 0;
+      }
+      #preview li {
+        margin: 0.25em 0;
+      }
+      #preview hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2em 0;
+      }
+      #preview table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1em 0;
+        font-size: 0.9em;
+      }
+      #preview th {
+        background: var(--surface2);
+        padding: 0.5em 0.75em;
+        border: 1px solid var(--border);
+        text-align: left;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75em;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #preview td {
+        padding: 0.5em 0.75em;
+        border: 1px solid var(--border);
+      }
+      #preview img {
+        max-width: 100%;
+        border-radius: var(--radius);
+      }
+
+      .preview-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        min-height: 200px;
+        color: var(--muted);
+        font-style: italic;
+        font-size: 0.95rem;
+        opacity: 0.7;
+      }
+
+      /* — Sidebar / metadata — */
+      .sidebar {
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        padding: 1.25rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 0.75rem;
+        align-items: end;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+      }
+
+      .field label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+      }
+
+      .field input,
+      .field select {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        color: var(--text);
+        font-family: "Source Serif 4", serif;
+        font-size: 0.85rem;
+        padding: 0.5rem 0.65rem;
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      .field input:focus,
+      .field select:focus {
+        border-color: var(--accent);
+      }
+      .field select option {
+        background: var(--surface2);
+      }
+
+      /* — Actions — */
+      .actions {
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        padding: 0.9rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .btn {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        border: none;
+        border-radius: var(--radius);
+        padding: 0.55rem 1.1rem;
+        cursor: pointer;
+        transition: all 0.15s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #0e0e0f;
+        font-weight: 700;
+      }
+      .btn-primary:hover {
+        filter: brightness(1.1);
+      }
+      .btn-primary:active {
+        transform: scale(0.98);
+      }
+      .btn-primary:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+      }
+      .btn-ghost:hover {
+        border-color: var(--muted);
+        color: var(--text);
+      }
+
+      .status {
+        margin-left: auto;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        transition: all 0.3s;
+      }
+      .status.ok {
+        color: var(--success);
+      }
+      .status.error {
+        color: #e87e7e;
+      }
+
+      /* toast */
+      #toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        padding: 0.6rem 1.2rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--text);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 100;
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      #toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+      #toast.success {
+        border-color: var(--success);
+        color: var(--success);
+      }
+      #toast.error {
+        border-color: #e87e7e;
+        color: #e87e7e;
+      }
+
+      footer {
+        padding: 0.6rem 1.5rem;
+        border-top: 1px solid var(--border);
+        background: var(--bg);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* Scrollbar */
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 10px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--muted);
+      }
+
+      /* — Ad banner — */
+      .ad-banner {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        min-height: 60px;
+        position: relative;
+      }
+
+      .ad-banner .ad-slot {
+        text-align: center;
+        max-width: 728px;
+        width: 100%;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ad-banner .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      .ad-banner .ad-placeholder {
+        border: 1px dashed var(--border);
+        border-radius: var(--radius);
+        padding: 0.6rem 2rem;
+        color: var(--muted);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        opacity: 0.5;
+      }
+
+      .ad-close {
+        position: absolute;
+        top: 4px;
+        left: 12px;
+        background: none;
+        border: none;
+        color: var(--muted);
+        font-size: 0.7rem;
+        cursor: pointer;
+        opacity: 0.5;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .ad-close:hover {
+        opacity: 1;
+      }
+
+      /* — SEO content section — */
+      .seo-content {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        padding: 3rem 2rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.8;
+      }
+      .seo-inner {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .seo-content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.6rem;
+        color: var(--text);
+        margin-bottom: 1rem;
+      }
+      .seo-content h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.15rem;
+        color: var(--text);
+        margin-top: 2rem;
+        margin-bottom: 0.75rem;
+      }
+      .seo-content p,
+      .seo-content ul,
+      .seo-content ol {
+        margin-bottom: 0.75rem;
+      }
+      .seo-content li {
+        margin-bottom: 0.35rem;
+      }
+      .seo-content strong {
+        color: var(--text);
+      }
+      .seo-content details {
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 0.5rem;
+        padding: 0;
+      }
+      .seo-content summary {
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        color: var(--text);
+        font-weight: 500;
+        font-size: 0.85rem;
+      }
+      .seo-content summary:hover {
+        background: var(--surface2);
+      }
+      .seo-content details p {
+        padding: 0 1rem 0.75rem;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+    </style>
   </head>
   <body>
-    <h1>
-      <a href="md_to_epub.html"
-        >Markdown to EPUB Converter — Free Online Tool</a
-      >
-    </h1>
-    <p>
-      Convert Markdown files to EPUB for Kindle and e-readers. Free, private,
-      browser-based.
-    </p>
+    <div class="shell">
+      <!-- Ad Banner -->
+      <div class="ad-banner" id="adBanner">
+        <button class="ad-close" onclick="closeAd()" title="Dismiss">✕</button>
+        <div class="ad-slot" id="adSlot">
+          <!-- STEP 2: Replace ca-pub-XXXXXXXX and data-ad-slot with your values from AdSense -->
+          <ins
+            class="adsbygoogle"
+            style="display: inline-block; width: 728px; height: 90px"
+            data-ad-client="ca-pub-XXXXXXXX"
+            data-ad-slot="YYYYYYYY"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <span class="ad-label">sponsored</span>
+      </div>
+
+      <header>
+        <div class="logo">MD → EPUB <span>converter</span></div>
+        <div class="badge">browser · no server</div>
+      </header>
+
+      <main>
+        <!-- LEFT: Editor -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="dot"></div>
+            <span class="panel-label">Markdown</span>
+            <div style="margin-left: auto; display: flex; gap: 0.5rem">
+              <button
+                class="btn btn-ghost"
+                onclick="loadSample()"
+                title="Load sample"
+              >
+                sample
+              </button>
+              <button
+                class="btn btn-ghost"
+                onclick="clearEditor()"
+                title="Clear"
+              >
+                clear
+              </button>
+              <label
+                class="btn btn-ghost"
+                style="cursor: pointer"
+                title="Open .md file"
+              >
+                ↑ open
+                <input
+                  type="file"
+                  accept=".md,.txt,.markdown"
+                  style="display: none"
+                  onchange="loadFile(event)"
+                />
+              </label>
+            </div>
+          </div>
+
+          <div class="editor-wrap" id="editorWrap">
+            <div class="drop-overlay" id="dropOverlay">
+              <span style="font-size: 2rem">📄</span>
+              Drop your .md file here
+            </div>
+            <textarea
+              id="editor"
+              placeholder="Write or paste your Markdown here...
+You can also drag and drop a .md file into this area.
+
+# Article Title
+
+Start writing..."
+            ></textarea>
+          </div>
+
+          <!-- Metadata -->
+          <div class="sidebar">
+            <div class="field">
+              <label>Title</label>
+              <input type="text" id="metaTitle" placeholder="Auto (from H1)" />
+            </div>
+            <div class="field">
+              <label>Author</label>
+              <input type="text" id="metaAuthor" placeholder="Unknown" />
+            </div>
+            <div class="field">
+              <label>Language</label>
+              <select id="metaLang">
+                <option value="en">English (en)</option>
+                <option value="pt">Português (pt)</option>
+                <option value="es">Español (es)</option>
+                <option value="fr">Français (fr)</option>
+                <option value="de">Deutsch (de)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="actions">
+            <button
+              class="btn btn-primary"
+              id="downloadBtn"
+              onclick="generateEpub()"
+            >
+              ⬇ Generate EPUB
+            </button>
+            <div class="status" id="status"></div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Preview -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="dot blue"></div>
+            <span class="panel-label">Preview</span>
+            <span
+              id="charCount"
+              style="
+                margin-left: auto;
+                font-family: &quot;JetBrains Mono&quot;, monospace;
+                font-size: 0.65rem;
+                color: var(--muted);
+              "
+              >0 chars</span
+            >
+          </div>
+          <div id="preview">
+            <div class="preview-empty" id="previewEmpty">
+              Preview appears here as you type
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <span
+          >Runs entirely in the browser — no data is sent to any server</span
+        >
+        <span id="wordCount">0 words</span>
+      </footer>
+    </div>
+
+    <!-- SEO Content Section (visible to search engines, styled to fit the page) -->
+    <section class="seo-content" aria-label="About this tool">
+      <div class="seo-inner">
+        <h1>Markdown to EPUB Converter — Free Online Tool</h1>
+        <p>
+          Convert your <strong>Markdown (.md) files to EPUB</strong> format
+          instantly, right in your browser. No upload, no server, no signup —
+          your files never leave your device. Perfect for
+          <strong>Kindle</strong>, Kobo, Apple Books, and any e-reader that
+          supports EPUB.
+        </p>
+
+        <h2>How It Works</h2>
+        <ol>
+          <li>
+            <strong>Paste or drag</strong> your Markdown file into the editor
+          </li>
+          <li><strong>Preview</strong> the formatted output in real time</li>
+          <li>
+            Set optional <strong>metadata</strong> (title, author, language)
+          </li>
+          <li>Click <strong>"Generate EPUB"</strong> to download your ebook</li>
+        </ol>
+
+        <h2>Why Use This Converter?</h2>
+        <ul>
+          <li>
+            <strong>100% Free</strong> — no limits, no watermarks, no hidden
+            fees
+          </li>
+          <li>
+            <strong>Private</strong> — runs entirely in your browser with
+            JavaScript; nothing is sent to a server
+          </li>
+          <li>
+            <strong>Fast</strong> — EPUB generation takes less than a second
+          </li>
+          <li>
+            <strong>Kindle-Ready</strong> — output is optimized for Kindle and
+            all major e-readers
+          </li>
+          <li>
+            <strong>GFM Support</strong> — full GitHub Flavored Markdown
+            including tables, code blocks, and task lists
+          </li>
+          <li>
+            <strong>No Install</strong> — works on any device with a modern
+            browser (Windows, Mac, Linux, mobile)
+          </li>
+        </ul>
+
+        <h2>Supported Markdown Features</h2>
+        <p>
+          The converter supports all standard Markdown syntax plus GitHub
+          Flavored Markdown (GFM):
+        </p>
+        <ul>
+          <li>Headings (H1–H6), paragraphs, line breaks</li>
+          <li>
+            <strong>Bold</strong>, <em>italic</em>, and strikethrough text
+          </li>
+          <li>Ordered and unordered lists</li>
+          <li>Links and images</li>
+          <li>Code blocks with syntax formatting</li>
+          <li>Blockquotes</li>
+          <li>Tables</li>
+          <li>Horizontal rules</li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+        <details>
+          <summary>How do I convert Markdown to EPUB?</summary>
+          <p>
+            Paste or drag your Markdown (.md) file into the editor, optionally
+            set the title, author, and language, then click "Generate EPUB". The
+            EPUB file downloads instantly — no account or upload needed.
+          </p>
+        </details>
+        <details>
+          <summary>Is this Markdown to EPUB converter free?</summary>
+          <p>
+            Yes, it is 100% free with no limits. There is no signup, no
+            watermark, and no file size restrictions.
+          </p>
+        </details>
+        <details>
+          <summary>Does my data stay private?</summary>
+          <p>
+            Yes. Everything runs in your browser using JavaScript. No data is
+            ever uploaded to a server. Your files never leave your device.
+          </p>
+        </details>
+        <details>
+          <summary>Can I read the EPUB on Kindle?</summary>
+          <p>
+            Yes. Kindle devices and the Kindle app support EPUB files. You can
+            send the EPUB to your Kindle via email (Send to Kindle) or USB.
+          </p>
+        </details>
+        <details>
+          <summary>What Markdown features are supported?</summary>
+          <p>
+            The converter supports GitHub Flavored Markdown (GFM) including
+            headings, bold, italic, links, images, code blocks, tables,
+            blockquotes, and lists.
+          </p>
+        </details>
+        <details>
+          <summary>Does it work on mobile?</summary>
+          <p>
+            Yes. The converter works on any device with a modern browser —
+            including phones and tablets running iOS, Android, Windows, or
+            macOS.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <div id="toast"></div>
+
+    <script>
+      // ---- Marked config ----
+      marked.setOptions({ breaks: true, gfm: true });
+
+      const editor = document.getElementById("editor");
+      const preview = document.getElementById("preview");
+      const previewEmpty = document.getElementById("previewEmpty");
+      const charCount = document.getElementById("charCount");
+      const wordCount = document.getElementById("wordCount");
+      const statusEl = document.getElementById("status");
+
+      // ---- Live preview ----
+      let debounceTimer;
+      editor.addEventListener("input", () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(updatePreview, 120);
+      });
+
+      function updatePreview() {
+        const md = editor.value.trim();
+        const chars = editor.value.length;
+        const words = md ? md.split(/\s+/).filter(Boolean).length : 0;
+        charCount.textContent = chars.toLocaleString("en") + " chars";
+        wordCount.textContent = words.toLocaleString("en") + " words";
+
+        if (!md) {
+          preview.innerHTML =
+            '<div class="preview-empty">Preview appears here as you type</div>';
+          return;
+        }
+        preview.innerHTML = marked.parse(md);
+      }
+
+      // ---- Drag & drop ----
+      const editorWrap = document.getElementById("editorWrap");
+      const dropOverlay = document.getElementById("dropOverlay");
+
+      editorWrap.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropOverlay.classList.add("active");
+      });
+      editorWrap.addEventListener("dragleave", (e) => {
+        if (!editorWrap.contains(e.relatedTarget))
+          dropOverlay.classList.remove("active");
+      });
+      editorWrap.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropOverlay.classList.remove("active");
+        const file = e.dataTransfer.files[0];
+        if (file) readFile(file);
+      });
+
+      function loadFile(event) {
+        const file = event.target.files[0];
+        if (file) readFile(file);
+        event.target.value = "";
+      }
+
+      function readFile(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          editor.value = e.target.result;
+          updatePreview();
+          toast(`📄 ${file.name} loaded`, "success");
+          // Auto-fill title from filename
+          const nameNoExt = file.name.replace(/\.(md|txt|markdown)$/i, "");
+          if (!document.getElementById("metaTitle").value) {
+            document.getElementById("metaTitle").placeholder = nameNoExt;
+          }
+        };
+        reader.readAsText(file, "utf-8");
+      }
+
+      // ---- Helpers ----
+      function extractH1(md) {
+        const m = md.match(/^#\s+(.+)$/m);
+        return m ? m[1].trim() : null;
+      }
+
+      function clearEditor() {
+        editor.value = "";
+        updatePreview();
+      }
+
+      function loadSample() {
+        editor.value = `# The Art of Slow Reading
+
+*By an avid reader*
+
+---
+
+We live in an era of **accelerated information consumption**. Articles, newsletters, threads — they arrive faster than we can digest. But there is an ancient practice that endures: slow reading.
+
+## What does it mean to read slowly?
+
+Reading slowly is not reading with difficulty. It's reading with *intention*. It's pausing on a sentence and letting it settle. It's going back. It's mentally underlining and asking: *why?*
+
+> "Reading is the only leisure activity that makes you smarter while you're doing it."
+
+## The benefits of deep reading
+
+1. **Richer comprehension** — the brain forms more connections when it's not rushing
+2. **Long-term memory** — what we read slowly stays with us longer
+3. **Empathy** — fiction read with attention develops theory of mind
+4. **Focus** — it trains attention in a world of distractions
+
+## How to get started
+
+Start with 20 minutes a day, with no phone nearby. Choose a text that genuinely interests you — not because you "should" read it, but because you want to.
+
+\`\`\`
+Simple ritual:
+1. Silence (or instrumental music)
+2. Physical book or e-reader with no notifications
+3. A pen for annotations
+\`\`\`
+
+The Kindle helps precisely here: a dedicated device, free from the chaos of a tablet. No Instagram a swipe away.
+
+---
+
+*Read more. Better. Slower.*
+`;
+        document.getElementById("metaTitle").value = "The Art of Slow Reading";
+        document.getElementById("metaAuthor").value = "A reader";
+        updatePreview();
+        toast("Sample loaded ✓", "success");
+      }
+
+      // ---- EPUB Generator ----
+      async function generateEpub() {
+        const md = editor.value.trim();
+        if (!md) {
+          toast("No content to convert", "error");
+          return;
+        }
+
+        const btn = document.getElementById("downloadBtn");
+        btn.disabled = true;
+        btn.textContent = "⏳ Generating...";
+        setStatus("loading", "Building EPUB...");
+
+        try {
+          const rawTitle = document.getElementById("metaTitle").value.trim();
+          const title = rawTitle || extractH1(md) || "Article";
+          const author =
+            document.getElementById("metaAuthor").value.trim() || "Unknown";
+          const lang = document.getElementById("metaLang").value;
+          const htmlBody = marked.parse(md);
+          const filename = slugify(title) + ".epub";
+
+          const zip = new JSZip();
+
+          // mimetype (must be first, uncompressed)
+          zip.file("mimetype", "application/epub+zip", {
+            compression: "STORE",
+          });
+
+          // META-INF/container.xml
+          zip.folder("META-INF").file(
+            "container.xml",
+            `<?xml version="1.0" encoding="UTF-8"?>
+<container version="1.0" xmlns="urn:oasis:schemas:container">
+  <rootfiles>
+    <rootfile full-path="EPUB/content.opf" media-type="application/oebps-package+xml"/>
+  </rootfiles>
+</container>`,
+          );
+
+          const epub = zip.folder("EPUB");
+
+          // content.opf
+          const uid = "urn:uuid:" + uuidv4();
+          epub.file(
+            "content.opf",
+            `<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifier="uid" xml:lang="${lang}">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">${uid}</dc:identifier>
+    <dc:title>${escapeXml(title)}</dc:title>
+    <dc:creator>${escapeXml(author)}</dc:creator>
+    <dc:language>${lang}</dc:language>
+    <dc:date>${new Date().toISOString().split("T")[0]}</dc:date>
+    <meta property="dcterms:modified">${new Date().toISOString().replace(/\.\d+Z$/, "Z")}</meta>
+  </metadata>
+  <manifest>
+    <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item id="content" href="content.xhtml" media-type="application/xhtml+xml"/>
+    <item id="css" href="style.css" media-type="text/css"/>
+  </manifest>
+  <spine>
+    <itemref idref="nav" linear="no"/>
+    <itemref idref="content"/>
+  </spine>
+</package>`,
+          );
+
+          // nav.xhtml
+          epub.file(
+            "nav.xhtml",
+            `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" xml:lang="${lang}">
+<head><title>${escapeXml(title)}</title></head>
+<body>
+  <nav epub:type="toc" id="toc">
+    <h1>Table of Contents</h1>
+    <ol><li><a href="content.xhtml">${escapeXml(title)}</a></li></ol>
+  </nav>
+</body>
+</html>`,
+          );
+
+          // style.css — optimised for e-readers / Kindle
+          epub.file(
+            "style.css",
+            `
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1em;
+  line-height: 1.7;
+  margin: 1.2em 1.5em;
+  color: #1a1a1a;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.25;
+  margin-top: 1.6em;
+  margin-bottom: 0.5em;
+}
+h1 { font-size: 1.75em; border-bottom: 1px solid #e0e0e0; padding-bottom: 0.3em; }
+h2 { font-size: 1.35em; }
+h3 { font-size: 1.1em; }
+p { margin: 0.75em 0; orphans: 2; widows: 2; }
+a { color: #1a6ca8; text-decoration: underline; }
+code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.87em;
+  background: #f5f5f5;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre {
+  background: #f5f5f5;
+  padding: 0.9em 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 1em 0;
+  font-size: 0.85em;
+}
+pre code { background: none; padding: 0; }
+blockquote {
+  border-left: 3px solid #bbb;
+  margin: 1em 0;
+  padding: 0.4em 1em;
+  color: #555;
+  font-style: italic;
+}
+ul, ol { padding-left: 1.5em; margin: 0.75em 0; }
+li { margin: 0.3em 0; }
+hr { border: none; border-top: 1px solid #ddd; margin: 2em 0; }
+img { max-width: 100%; height: auto; display: block; margin: 1em auto; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; font-size: 0.9em; }
+th { background: #f0f0f0; font-weight: bold; text-align: left; }
+th, td { border: 1px solid #ccc; padding: 0.4em 0.65em; }
+strong { font-weight: bold; }
+em { font-style: italic; }
+`,
+          );
+
+          // content.xhtml
+          epub.file(
+            "content.xhtml",
+            `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${lang}">
+<head>
+  <meta charset="UTF-8"/>
+  <title>${escapeXml(title)}</title>
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+${htmlBody}
+</body>
+</html>`,
+          );
+
+          // Generate ZIP as blob
+          const blob = await zip.generateAsync({
+            type: "blob",
+            mimeType: "application/epub+zip",
+            compression: "DEFLATE",
+            compressionOptions: { level: 9 },
+          });
+
+          // Download
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = filename;
+          a.click();
+          setTimeout(() => URL.revokeObjectURL(url), 5000);
+
+          setStatus("ok", `${filename} (${formatBytes(blob.size)})`);
+          toast(`✓ ${filename} downloaded`, "success");
+        } catch (err) {
+          console.error(err);
+          setStatus("error", "Error generating EPUB");
+          toast("Error: " + err.message, "error");
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "⬇ Generate EPUB";
+        }
+      }
+
+      // ---- Utilities ----
+      function setStatus(type, msg) {
+        statusEl.className = "status " + (type === "loading" ? "" : type);
+        const icons = { ok: "✓", error: "✗", loading: "…" };
+        statusEl.textContent = (icons[type] || "") + " " + msg;
+      }
+
+      function toast(msg, type = "") {
+        const el = document.getElementById("toast");
+        el.textContent = msg;
+        el.className = "show " + type;
+        setTimeout(() => {
+          el.className = "";
+        }, 3000);
+      }
+
+      function slugify(str) {
+        return (
+          str
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "") || "article"
+        );
+      }
+
+      function escapeXml(str) {
+        return str
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function formatBytes(b) {
+        return b < 1024 ? b + " B" : (b / 1024).toFixed(1) + " KB";
+      }
+
+      function uuidv4() {
+        return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+          const r = (Math.random() * 16) | 0;
+          return (c === "x" ? r : (r & 0x3) | 0x8).toString(16);
+        });
+      }
+
+      // ---- Ad management ----
+      function closeAd() {
+        const banner = document.getElementById("adBanner");
+        banner.style.display = "none";
+      }
+
+      // Init
+      updatePreview();
+    </script>
   </body>
 </html>
