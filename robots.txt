@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
+Allow: /guide.html
+Allow: /how-to.html
+Allow: /about.html
+Allow: /privacy.html
+Allow: /terms.html
 
 Sitemap: https://mdtoepub.com/sitemap.xml

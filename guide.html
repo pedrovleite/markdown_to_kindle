@@ -1,0 +1,1301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="google-adsense-account" content="ca-pub-4608381042047290" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      The Complete Guide to Converting Markdown to EPUB for Kindle & E-Readers
+    </title>
+    <meta
+      name="description"
+      content="Learn everything about converting Markdown to EPUB. This comprehensive guide covers Markdown syntax, EPUB format, Kindle compatibility, best practices, and tips for creating professional ebooks from plain text files."
+    />
+    <meta
+      name="keywords"
+      content="markdown to epub guide, markdown ebook tutorial, convert markdown kindle, epub format explained, markdown writing guide, ebook publishing, markdown syntax guide"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0e0e0f" />
+    <link rel="canonical" href="https://mdtoepub.com/guide.html" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230e0e0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='48' font-weight='bold' fill='%23e8c97e'%3EE%3C/text%3E%3C/svg%3E"
+    />
+    <meta
+      property="og:title"
+      content="The Complete Guide to Converting Markdown to EPUB"
+    />
+    <meta
+      property="og:description"
+      content="Everything you need to know about Markdown, EPUB, and converting your writing into professional ebooks for Kindle and e-readers."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://mdtoepub.com/guide.html" />
+
+    <!-- Structured Data: Article -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Complete Guide to Converting Markdown to EPUB for Kindle & E-Readers",
+        "description": "Learn everything about converting Markdown to EPUB format. Covers Markdown syntax, EPUB structure, Kindle compatibility, and best practices for ebook creation.",
+        "url": "https://mdtoepub.com/guide.html",
+        "datePublished": "2025-12-01",
+        "dateModified": "2026-03-19",
+        "publisher": {
+          "@type": "Organization",
+          "name": "mdtoepub.com",
+          "url": "https://mdtoepub.com"
+        },
+        "mainEntityOfPage": "https://mdtoepub.com/guide.html"
+      }
+    </script>
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4608381042047290"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0e0e0f;
+        --surface: #161618;
+        --surface2: #1e1e21;
+        --border: #2a2a2e;
+        --accent: #e8c97e;
+        --accent2: #7eb8e8;
+        --text: #e8e6e0;
+        --muted: #7a7870;
+        --radius: 6px;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Source Serif 4", serif;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto auto auto 1fr auto;
+      }
+
+      header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--muted);
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      nav {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0;
+        transition: color 0.15s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: var(--accent);
+      }
+      nav .nav-spacer {
+        flex: 1;
+      }
+
+      .ad-banner {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        position: relative;
+      }
+      .ad-banner .ad-slot {
+        text-align: center;
+        max-width: 728px;
+        width: 100%;
+      }
+      .ad-banner .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      .content {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+      .content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+      .content .subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      .content .meta-info {
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-bottom: 2rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .content h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--text);
+        margin-top: 3rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .content h3 {
+        font-size: 1.1rem;
+        color: var(--accent2);
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .content h4 {
+        font-size: 1rem;
+        color: var(--text);
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .content p {
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .content ul,
+      .content ol {
+        padding-left: 1.5em;
+        margin-bottom: 1rem;
+      }
+      .content li {
+        margin-bottom: 0.4rem;
+      }
+      .content a {
+        color: var(--accent2);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .content strong {
+        color: var(--text);
+      }
+      .content em {
+        font-style: italic;
+      }
+      .content code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82em;
+        background: var(--surface2);
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+        color: var(--accent);
+      }
+      .content pre {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1rem 0 1.5rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+      .content pre code {
+        background: none;
+        padding: 0;
+        color: var(--text);
+      }
+      .content blockquote {
+        border-left: 3px solid var(--accent);
+        margin: 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+        color: var(--muted);
+        font-style: italic;
+        background: var(--surface);
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+      .content blockquote p {
+        margin-bottom: 0.5rem;
+      }
+      .content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.9rem;
+      }
+      .content th {
+        background: var(--surface2);
+        padding: 0.6em 0.75em;
+        border: 1px solid var(--border);
+        text-align: left;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8em;
+      }
+      .content td {
+        padding: 0.5em 0.75em;
+        border: 1px solid var(--border);
+      }
+      .content hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2.5rem 0;
+      }
+
+      .toc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+      .toc h3 {
+        font-family: "Playfair Display", serif;
+        color: var(--accent);
+        margin: 0 0 0.75rem;
+        font-size: 1rem;
+      }
+      .toc ol {
+        padding-left: 1.25em;
+        margin: 0;
+      }
+      .toc li {
+        margin-bottom: 0.3rem;
+        font-size: 0.9rem;
+      }
+      .toc a {
+        color: var(--accent2);
+        text-decoration: none;
+      }
+      .toc a:hover {
+        text-decoration: underline;
+      }
+
+      .tip-box {
+        background: var(--surface);
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      .tip-box .tip-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+      }
+      .tip-box p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .cta-box {
+        background: var(--surface2);
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+      }
+      .cta-box h3 {
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+      }
+      .cta-box p {
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .cta-box a.btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #0e0e0f;
+        padding: 0.7rem 1.5rem;
+        border-radius: var(--radius);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .cta-box a.btn:hover {
+        filter: brightness(1.1);
+      }
+
+      /* Mid-content ad */
+      .ad-mid {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.75rem;
+        margin: 2rem 0;
+        text-align: center;
+        position: relative;
+      }
+      .ad-mid .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.45rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      footer {
+        padding: 1.2rem 1.5rem 0.8rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a href="/" class="logo">MD → EPUB <span>converter</span></a>
+      </header>
+
+      <nav>
+        <a href="/">Converter</a>
+        <a href="/guide.html" class="active">Guide</a>
+        <a href="/how-to.html">How-To</a>
+        <a href="/about.html">About</a>
+        <span class="nav-spacer"></span>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+
+      <div class="ad-banner">
+        <div class="ad-slot">
+          <ins
+            class="adsbygoogle"
+            style="display: inline-block; width: 728px; height: 90px"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <span class="ad-label">sponsored</span>
+      </div>
+
+      <div class="content">
+        <h1>The Complete Guide to Converting Markdown to EPUB</h1>
+        <p class="subtitle">
+          Everything you need to know about turning plain text into professional
+          ebooks for Kindle and e-readers.
+        </p>
+        <p class="meta-info">Updated March 19, 2026 · 15 min read</p>
+
+        <div class="toc">
+          <h3>Table of Contents</h3>
+          <ol>
+            <li><a href="#what-is-markdown">What Is Markdown?</a></li>
+            <li><a href="#what-is-epub">What Is EPUB?</a></li>
+            <li><a href="#why-convert">Why Convert Markdown to EPUB?</a></li>
+            <li><a href="#markdown-syntax">Markdown Syntax Reference</a></li>
+            <li><a href="#epub-structure">Understanding EPUB Structure</a></li>
+            <li>
+              <a href="#best-practices">Best Practices for Ebook Markdown</a>
+            </li>
+            <li><a href="#kindle-tips">Kindle-Specific Tips</a></li>
+            <li><a href="#advanced">Advanced Techniques</a></li>
+            <li>
+              <a href="#comparison">Comparison: Markdown vs. Other Formats</a>
+            </li>
+            <li>
+              <a href="#troubleshooting">Troubleshooting Common Issues</a>
+            </li>
+          </ol>
+        </div>
+
+        <h2 id="what-is-markdown">1. What Is Markdown?</h2>
+        <p>
+          Markdown is a lightweight markup language created by
+          <strong>John Gruber</strong> in 2004, with significant contributions
+          from Aaron Swartz. It was designed with a clear philosophy: the source
+          text should be readable as-is, without requiring any rendering. In
+          other words, a Markdown document looks natural and clean even before
+          it's converted to HTML or any other format.
+        </p>
+        <p>
+          Since its creation, Markdown has become the dominant format for
+          writing on the web. It's used by GitHub for README files and
+          documentation, by Stack Overflow for questions and answers, by Reddit
+          for comments, by Slack and Discord for messages, by countless blogging
+          platforms, and by many writers as their primary authoring format.
+        </p>
+        <p>
+          The most widespread variant is
+          <strong>GitHub Flavored Markdown (GFM)</strong>, which extends the
+          original specification with features like tables, fenced code blocks,
+          task lists, strikethrough text, and autolinks. Our converter fully
+          supports GFM, so you can use all of these features in your ebooks.
+        </p>
+
+        <h3>A Brief History</h3>
+        <p>
+          In the early 2000s, John Gruber was frustrated by the verbosity of
+          HTML for writing blog posts. He wanted a format that was easy to type,
+          easy to read, and could be trivially converted to HTML. Drawing
+          inspiration from existing plain-text email conventions (like using
+          asterisks for emphasis), he created Markdown and released it as open
+          source.
+        </p>
+        <p>
+          The original specification was intentionally minimal, which led to
+          various "flavors" as different platforms extended it for their needs.
+          In 2014, a standardization effort led to <strong>CommonMark</strong>,
+          which defined a strict specification for Markdown parsing. GitHub's
+          GFM builds on CommonMark with additional extensions.
+        </p>
+
+        <h2 id="what-is-epub">2. What Is EPUB?</h2>
+        <p>
+          EPUB (Electronic Publication) is an open ebook standard maintained by
+          the <strong>W3C</strong> (World Wide Web Consortium). First released
+          in 2007 by the IDPF (International Digital Publishing Forum), EPUB has
+          become the most widely supported ebook format worldwide.
+        </p>
+        <p>
+          An EPUB file is essentially a ZIP archive with a specific internal
+          structure. It contains:
+        </p>
+        <ul>
+          <li>
+            <strong>XHTML content files</strong> — the actual text of the book,
+            formatted as valid XHTML
+          </li>
+          <li>
+            <strong>CSS stylesheets</strong> — control the visual presentation
+            (fonts, margins, colors)
+          </li>
+          <li>
+            <strong>OPF package file</strong> — metadata and manifest describing
+            all resources in the book
+          </li>
+          <li>
+            <strong>Navigation document</strong> — table of contents for reader
+            navigation
+          </li>
+          <li>
+            <strong>Images</strong> — any graphics, illustrations, or photos
+            embedded in the book
+          </li>
+          <li>
+            <strong>container.xml</strong> — entry point for the reading system
+            to find the package file
+          </li>
+        </ul>
+
+        <h3>EPUB 2 vs. EPUB 3</h3>
+        <p>
+          EPUB 2 (released 2007) was the original standard and used XHTML 1.1
+          for content. EPUB 3 (released 2011, updated through 2023) is the
+          current standard and brings significant improvements:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>EPUB 2</th>
+              <th>EPUB 3</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Content format</td>
+              <td>XHTML 1.1</td>
+              <td>HTML5 / XHTML5</td>
+            </tr>
+            <tr>
+              <td>Styling</td>
+              <td>CSS 2.1 subset</td>
+              <td>CSS3</td>
+            </tr>
+            <tr>
+              <td>Navigation</td>
+              <td>NCX (XML)</td>
+              <td>XHTML nav document</td>
+            </tr>
+            <tr>
+              <td>Multimedia</td>
+              <td>Limited</td>
+              <td>Audio, video, MathML, SVG</td>
+            </tr>
+            <tr>
+              <td>Scripting</td>
+              <td>Not supported</td>
+              <td>JavaScript (optional)</td>
+            </tr>
+            <tr>
+              <td>Accessibility</td>
+              <td>Basic</td>
+              <td>ARIA, WCAG support</td>
+            </tr>
+            <tr>
+              <td>Metadata</td>
+              <td>Dublin Core</td>
+              <td>Extended Dublin Core + custom</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Our converter generates <strong>EPUB 3</strong> files, which offer the
+          widest compatibility across modern e-readers while supporting the
+          latest web standards for content formatting.
+        </p>
+
+        <h2 id="why-convert">3. Why Convert Markdown to EPUB?</h2>
+        <p>
+          Converting Markdown to EPUB combines the best of two worlds: the
+          simplicity of Markdown authoring with the universal compatibility of
+          the EPUB ebook format. Here are the key reasons this workflow is
+          valuable:
+        </p>
+
+        <h3>For Writers and Authors</h3>
+        <ul>
+          <li>
+            <strong>Distraction-free writing:</strong> Markdown editors are
+            minimalist by nature. No ribbon menus, no font pickers, no
+            formatting toolbars. Just you and the words.
+          </li>
+          <li>
+            <strong>Focus on structure:</strong> Markdown naturally encourages
+            proper document structure with headings, paragraphs, and lists —
+            exactly what makes a well-organized ebook.
+          </li>
+          <li>
+            <strong>Version control:</strong> Since Markdown files are plain
+            text, they work perfectly with Git. Track every revision, compare
+            drafts, branch for different editions.
+          </li>
+          <li>
+            <strong>Multiple outputs:</strong> The same Markdown source can be
+            converted to EPUB, PDF, HTML, DOCX — write once, publish everywhere.
+          </li>
+        </ul>
+
+        <h3>For Developers and Technical Writers</h3>
+        <ul>
+          <li>
+            <strong>Documentation as ebooks:</strong> Convert README files, API
+            docs, or project wikis into EPUB for offline reading on an e-reader
+            during commutes.
+          </li>
+          <li>
+            <strong>Code documentation:</strong> Fenced code blocks in Markdown
+            render beautifully in EPUB, making it ideal for technical ebooks and
+            tutorials.
+          </li>
+          <li>
+            <strong>Automation friendly:</strong> Markdown-to-EPUB conversion
+            can be automated in CI/CD pipelines for generating documentation
+            ebooks with each release.
+          </li>
+        </ul>
+
+        <h3>For Students and Researchers</h3>
+        <ul>
+          <li>
+            <strong>Study materials:</strong> Compile class notes written in
+            Markdown into organized ebooks for portable studying.
+          </li>
+          <li>
+            <strong>Research papers:</strong> Convert research notes and
+            literature reviews into EPUB for comfortable reading on e-ink
+            devices.
+          </li>
+          <li>
+            <strong>Thesis drafts:</strong> Use Markdown for drafting thesis
+            chapters and convert to EPUB to review on a Kindle, catching errors
+            you'd miss on a computer screen.
+          </li>
+        </ul>
+
+        <div class="tip-box">
+          <div class="tip-label">💡 Pro Tip</div>
+          <p>
+            Reading your own writing on a different device (like an e-reader
+            instead of your computer screen) helps you catch mistakes and
+            awkward phrasing. Converting to EPUB for review on a Kindle is a
+            powerful editing technique used by many professional authors.
+          </p>
+        </div>
+
+        <!-- Mid-content ad -->
+        <div class="ad-mid">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          <span class="ad-label">sponsored</span>
+        </div>
+
+        <h2 id="markdown-syntax">4. Markdown Syntax Reference</h2>
+        <p>
+          Here's a complete reference of the Markdown syntax supported by our
+          converter. All examples use GitHub Flavored Markdown (GFM), which is
+          the most widely used variant.
+        </p>
+
+        <h3>Headings</h3>
+        <p>
+          Use hash symbols (<code>#</code>) to create headings. The number of
+          hashes determines the heading level:
+        </p>
+        <pre><code># Heading Level 1
+## Heading Level 2
+### Heading Level 3
+#### Heading Level 4
+##### Heading Level 5
+###### Heading Level 6</code></pre>
+        <p>
+          <strong>Best practice for ebooks:</strong> Use H1 for the book or
+          chapter title, H2 for major sections, and H3 for subsections. Most
+          e-readers display H1 headings prominently, so use them sparingly.
+        </p>
+
+        <h3>Paragraphs and Line Breaks</h3>
+        <p>
+          Paragraphs are separated by blank lines. A single line break within a
+          paragraph is ignored in standard Markdown, but GFM (with
+          <code>breaks: true</code>) treats it as a <code>&lt;br&gt;</code>.
+        </p>
+        <pre><code>This is the first paragraph. It can span
+multiple lines in the source file.
+
+This is the second paragraph, separated by a blank line.</code></pre>
+
+        <h3>Emphasis and Strong Text</h3>
+        <pre><code>*italic text* or _italic text_
+**bold text** or __bold text__
+***bold and italic***
+~~strikethrough text~~</code></pre>
+
+        <h3>Links and Images</h3>
+        <pre><code>[Link text](https://example.com)
+[Link with title](https://example.com "Title text")
+
+![Alt text for image](image-url.jpg)
+![Alt text](image.png "Image title")</code></pre>
+        <p>
+          <strong>Note for EPUB:</strong> External images (URLs) won't be
+          embedded in the EPUB file. For images to appear in the ebook, they
+          need to be base64-encoded data URIs or you'll need a more advanced
+          conversion tool that bundles image assets.
+        </p>
+
+        <h3>Lists</h3>
+        <pre><code>Unordered list:
+- Item one
+- Item two
+  - Nested item
+  - Another nested item
+- Item three
+
+Ordered list:
+1. First step
+2. Second step
+3. Third step
+   1. Sub-step A
+   2. Sub-step B</code></pre>
+
+        <h3>Blockquotes</h3>
+        <pre><code>&gt; This is a blockquote. It's great for
+&gt; epigraphs, citations, or highlighted passages.
+&gt;
+&gt; — Author Name</code></pre>
+
+        <h3>Code</h3>
+        <pre><code>Inline code: `const x = 42;`
+
+Fenced code block:
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+```</code></pre>
+
+        <h3>Tables (GFM)</h3>
+        <pre><code>| Column 1 | Column 2 | Column 3 |
+|----------|:--------:|---------:|
+| Left     | Center   | Right    |
+| aligned  | aligned  | aligned  |</code></pre>
+
+        <h3>Horizontal Rules</h3>
+        <pre><code>---
+***
+___</code></pre>
+        <p>
+          All three produce the same horizontal line. In ebooks, these work well
+          as section dividers.
+        </p>
+
+        <h3>Task Lists (GFM)</h3>
+        <pre><code>- [x] Completed task
+- [ ] Pending task
+- [ ] Another pending task</code></pre>
+
+        <h2 id="epub-structure">5. Understanding EPUB Structure</h2>
+        <p>
+          To create high-quality ebooks, it helps to understand what's inside an
+          EPUB file. When you rename an <code>.epub</code> file to
+          <code>.zip</code> and extract it, you'll see a structure like this:
+        </p>
+        <pre><code>my-book.epub (ZIP archive)
+├── mimetype                    # Must be first file, contains "application/epub+zip"
+├── META-INF/
+│   └── container.xml           # Points to the package document
+└── EPUB/
+    ├── content.opf             # Package document (metadata + manifest)
+    ├── nav.xhtml               # Navigation document (table of contents)
+    ├── content.xhtml           # The actual book content
+    └── style.css               # Stylesheet for formatting</code></pre>
+
+        <h3>The Package Document (content.opf)</h3>
+        <p>
+          The OPF (Open Packaging Format) file is the heart of an EPUB. It
+          contains three main sections:
+        </p>
+        <ul>
+          <li>
+            <strong>Metadata:</strong> Title, author, language, unique
+            identifier, publication date, and other bibliographic information
+            following the Dublin Core standard.
+          </li>
+          <li>
+            <strong>Manifest:</strong> A complete list of all files in the EPUB
+            with their MIME types. Every XHTML page, image, stylesheet, and font
+            must be listed here.
+          </li>
+          <li>
+            <strong>Spine:</strong> The reading order — which content files to
+            display and in what sequence. This determines the flow of the book.
+          </li>
+        </ul>
+
+        <h3>The Navigation Document</h3>
+        <p>
+          EPUB 3 uses an XHTML-based navigation document (replacing the NCX
+          format from EPUB 2). This provides the table of contents that readers
+          see when they tap the TOC button on their e-reader. Our converter
+          automatically generates a basic navigation document based on your
+          content.
+        </p>
+
+        <h2 id="best-practices">6. Best Practices for Ebook Markdown</h2>
+        <p>
+          While any valid Markdown will convert to EPUB, following these best
+          practices will produce more professional and readable ebooks:
+        </p>
+
+        <h3>Document Structure</h3>
+        <ol>
+          <li>
+            <strong>Start with a single H1:</strong> Use one H1 heading at the
+            top for the book/chapter title. This will be picked up as the EPUB
+            title if you don't set one manually.
+          </li>
+          <li>
+            <strong>Use consistent heading hierarchy:</strong> Don't skip levels
+            (e.g., H1 → H3). Go H1 → H2 → H3 in order. This creates a logical
+            structure that e-readers can navigate.
+          </li>
+          <li>
+            <strong>Separate sections with horizontal rules:</strong> Use
+            <code>---</code> to create clear visual breaks between major
+            sections.
+          </li>
+          <li>
+            <strong>Keep paragraphs focused:</strong> On e-readers, long
+            paragraphs become walls of text. Aim for 3-5 sentences per
+            paragraph.
+          </li>
+        </ol>
+
+        <h3>Formatting Tips</h3>
+        <ul>
+          <li>
+            <strong>Use emphasis sparingly:</strong> Bold and italic lose their
+            impact when overused. Reserve bold for key terms on first
+            introduction and italic for titles, foreign words, or emphasis.
+          </li>
+          <li>
+            <strong>Keep tables simple:</strong> E-readers have limited
+            horizontal space. Tables with more than 3-4 columns may not display
+            well on small screens.
+          </li>
+          <li>
+            <strong>Test code blocks:</strong> Monospaced code looks great on
+            larger screens but can overflow on smaller e-readers. Keep lines
+            short (under 60 characters) in code blocks.
+          </li>
+          <li>
+            <strong>Use blockquotes purposefully:</strong> Blockquotes work well
+            for epigraphs, citations, and important callouts. They're rendered
+            with distinct styling on most e-readers.
+          </li>
+        </ul>
+
+        <h3>Metadata Matters</h3>
+        <p>Always set proper metadata before generating your EPUB:</p>
+        <ul>
+          <li>
+            <strong>Title:</strong> A clear, descriptive title. This appears in
+            your e-reader's library and makes your ebook findable.
+          </li>
+          <li>
+            <strong>Author:</strong> Your name or pen name. This is displayed
+            alongside the title in most e-reader libraries.
+          </li>
+          <li>
+            <strong>Language:</strong> Set the correct language code (en, pt,
+            es, fr, de). This affects hyphenation and text-to-speech on
+            e-readers.
+          </li>
+        </ul>
+
+        <div class="tip-box">
+          <div class="tip-label">💡 Pro Tip</div>
+          <p>
+            If you don't set a title manually, the converter automatically
+            extracts the first H1 heading from your Markdown. This means your
+            opening <code># My Book Title</code> becomes the EPUB title — one
+            less thing to configure.
+          </p>
+        </div>
+
+        <!-- Mid-content ad -->
+        <div class="ad-mid">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          <span class="ad-label">sponsored</span>
+        </div>
+
+        <h2 id="kindle-tips">7. Kindle-Specific Tips</h2>
+        <p>
+          Amazon Kindle is the world's most popular e-reader, and since late
+          2022, it natively supports EPUB files. Here are tips specifically for
+          creating Kindle-optimized EPUB files:
+        </p>
+
+        <h3>Sending EPUB to Kindle</h3>
+        <p>There are four main ways to get your EPUB onto a Kindle device:</p>
+        <ol>
+          <li>
+            <strong>Send to Kindle by Email:</strong> Every Kindle has a unique
+            email address (found in Settings → Your Account → Send-to-Kindle
+            Email). Email the EPUB as an attachment and it will appear in your
+            library. Subject line can be blank.
+          </li>
+          <li>
+            <strong>Send to Kindle App:</strong> Amazon offers a free desktop
+            app for Windows and Mac. Simply drag and drop your EPUB file onto
+            the app to sync it to all your Kindle devices.
+          </li>
+          <li>
+            <strong>USB Transfer:</strong> Connect your Kindle via USB cable. It
+            appears as a storage device. Copy the EPUB file into the
+            <code>Documents</code> folder.
+          </li>
+          <li>
+            <strong>Kindle Mobile App:</strong> On iOS and Android, you can open
+            EPUB files directly in the Kindle app using the system share sheet.
+          </li>
+        </ol>
+
+        <h3>Kindle Formatting Considerations</h3>
+        <ul>
+          <li>
+            <strong>Font rendering:</strong> Kindle uses its own font rendering
+            engine. The CSS fonts in the EPUB are suggestions — Kindle may or
+            may not use them. Design for readability, not for specific fonts.
+          </li>
+          <li>
+            <strong>Dark mode:</strong> Modern Kindles support dark mode, which
+            inverts colors. Avoid hardcoding light/dark colors in your content
+            that would break in inverted mode.
+          </li>
+          <li>
+            <strong>Page breaks:</strong> On Kindle, chapters typically start on
+            a new page. Using H1 headings for chapter titles helps Kindle
+            identify chapter boundaries.
+          </li>
+          <li>
+            <strong>Image sizing:</strong> Kindle e-ink screens are typically
+            6-7 inches. Ensure images are at least 600px wide for crisp display
+            but under 2MB per image for performance.
+          </li>
+          <li>
+            <strong>Tables:</strong> Kindle's table rendering is limited. Keep
+            tables narrow (2-3 columns) and avoid complex nested structures.
+          </li>
+        </ul>
+
+        <h3>Kindle Previewer</h3>
+        <p>
+          Amazon provides a free tool called
+          <strong>Kindle Previewer</strong> that lets you test how your EPUB
+          will look on various Kindle devices before sending it. It's available
+          for Windows and Mac at
+          <a
+            href="https://www.amazon.com/Kindle-Previewer"
+            target="_blank"
+            rel="noopener"
+            >amazon.com/Kindle-Previewer</a
+          >. This is highly recommended for authors who want pixel-perfect
+          control over their ebook's appearance.
+        </p>
+
+        <h2 id="advanced">8. Advanced Techniques</h2>
+
+        <h3>Writing a Full Book in Markdown</h3>
+        <p>
+          For longer works like novels or textbooks, organize your Markdown with
+          a clear structure:
+        </p>
+        <pre><code># My Amazing Book
+
+## Part One: The Beginning
+
+### Chapter 1: The Discovery
+
+The morning sun cast long shadows across the cobblestone street...
+
+### Chapter 2: The Journey
+
+Three days had passed since the discovery...
+
+---
+
+## Part Two: The Middle
+
+### Chapter 3: The Challenge
+
+Nothing could have prepared them for what came next...</code></pre>
+        <p>
+          This hierarchical structure (H1 for book title, H2 for parts, H3 for
+          chapters) creates a well-organized EPUB that e-readers can navigate
+          chapter by chapter.
+        </p>
+
+        <h3>Front Matter and Back Matter</h3>
+        <p>Professional ebooks typically include:</p>
+        <ul>
+          <li>
+            <strong>Front matter:</strong> Title page, copyright notice,
+            dedication, table of contents, foreword/preface
+          </li>
+          <li><strong>Body:</strong> The main content of the book</li>
+          <li>
+            <strong>Back matter:</strong> Appendices, glossary, bibliography,
+            author bio, acknowledgments
+          </li>
+        </ul>
+        <p>
+          You can create all of these in Markdown using headings and horizontal
+          rules as dividers.
+        </p>
+
+        <h3>Multi-Language Ebooks</h3>
+        <p>
+          If your ebook contains text in multiple languages, set the primary
+          language in the converter's language dropdown. This affects the EPUB's
+          default language tag, which e-readers use for hyphenation rules and
+          text-to-speech pronunciation.
+        </p>
+
+        <h2 id="comparison">
+          9. Comparison: Markdown vs. Other Authoring Formats
+        </h2>
+        <p>
+          How does Markdown compare to other common authoring formats for ebook
+          creation?
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Markdown</th>
+              <th>Word (DOCX)</th>
+              <th>LaTeX</th>
+              <th>HTML</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Learning curve</td>
+              <td>Very low</td>
+              <td>Low</td>
+              <td>Very high</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>Plain text</td>
+              <td>Yes</td>
+              <td>No (binary)</td>
+              <td>Yes</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Version control</td>
+              <td>Excellent</td>
+              <td>Poor</td>
+              <td>Excellent</td>
+              <td>Good</td>
+            </tr>
+            <tr>
+              <td>Readability</td>
+              <td>High</td>
+              <td>High (rendered)</td>
+              <td>Low</td>
+              <td>Medium</td>
+            </tr>
+            <tr>
+              <td>EPUB conversion</td>
+              <td>Simple</td>
+              <td>Moderate</td>
+              <td>Complex</td>
+              <td>Moderate</td>
+            </tr>
+            <tr>
+              <td>Advanced layout</td>
+              <td>Limited</td>
+              <td>Good</td>
+              <td>Excellent</td>
+              <td>Excellent</td>
+            </tr>
+            <tr>
+              <td>File size</td>
+              <td>Tiny</td>
+              <td>Large</td>
+              <td>Small</td>
+              <td>Small</td>
+            </tr>
+            <tr>
+              <td>Tool dependency</td>
+              <td>None</td>
+              <td>MS Office</td>
+              <td>LaTeX distro</td>
+              <td>None</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          For most ebook authors, Markdown offers the best balance of
+          simplicity, portability, and output quality. It's the fastest path
+          from writing to a published ebook.
+        </p>
+
+        <h2 id="troubleshooting">10. Troubleshooting Common Issues</h2>
+
+        <h3>EPUB won't open on my e-reader</h3>
+        <p>
+          Make sure your e-reader supports EPUB format. Most modern devices do,
+          including Kindle (since 2022), Kobo, Apple Books, and Google Play
+          Books. If you have an older Kindle, you may need to use Amazon's Send
+          to Kindle service, which automatically converts the format.
+        </p>
+
+        <h3>Formatting looks wrong in the ebook</h3>
+        <p>
+          E-readers apply their own styles on top of the EPUB's CSS. Some
+          formatting differences are expected. Ensure your Markdown follows
+          proper syntax — especially for headings (space after <code>#</code>),
+          lists (consistent indentation), and code blocks (triple backticks on
+          their own line).
+        </p>
+
+        <h3>Tables are cut off</h3>
+        <p>
+          E-reader screens are narrow (typically 600px effective width). Tables
+          with many columns may not fit. Solutions: reduce columns, abbreviate
+          headers, or convert the table to a list format.
+        </p>
+
+        <h3>Images don't appear</h3>
+        <p>
+          If your Markdown references external image URLs, they won't be
+          embedded in the EPUB. For images to work in offline ebooks, they need
+          to be included as data URIs (base64-encoded) in the Markdown or
+          handled by a more advanced build tool that bundles assets.
+        </p>
+
+        <h3>Special characters are broken</h3>
+        <p>
+          Make sure your Markdown file is saved as UTF-8 encoding. Most modern
+          editors default to UTF-8, but some older tools may use different
+          encodings. The converter expects UTF-8 input.
+        </p>
+
+        <h3>The EPUB is very large</h3>
+        <p>
+          Text-only EPUBs are typically very small (under 100KB). If your EPUB
+          is large, it's likely due to embedded images. Optimize images before
+          including them — use JPEG for photos and PNG for graphics with
+          transparency, and keep file sizes reasonable.
+        </p>
+
+        <hr />
+
+        <div class="cta-box">
+          <h3>Ready to Convert?</h3>
+          <p>
+            Try the converter now — paste your Markdown and download an EPUB in
+            seconds.
+          </p>
+          <a href="/" class="btn">Open Converter →</a>
+        </div>
+
+        <hr />
+
+        <p>
+          <em
+            >This guide is regularly updated as we add new features and as ebook
+            standards evolve. Last updated: March 19, 2026. If you have
+            suggestions or find errors, please
+            <a href="/about.html">contact us</a>.</em
+          >
+        </p>
+      </div>
+
+      <footer>
+        <div class="footer-top">
+          <div class="footer-links">
+            <a href="/">Converter</a>
+            <a href="/guide.html">Markdown to EPUB Guide</a>
+            <a href="/how-to.html">How-To Tutorial</a>
+            <a href="/about.html">About &amp; Contact</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >© 2025–2026 mdtoepub.com — Runs entirely in the browser, no data is
+            sent to any server</span
+          >
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

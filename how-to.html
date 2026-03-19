@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="google-adsense-account" content="ca-pub-4608381042047290" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How to Convert Markdown to EPUB — Step-by-Step Tutorial</title>
+    <meta
+      name="description"
+      content="Step-by-step tutorial showing how to convert Markdown files to EPUB ebooks using mdtoepub.com. Includes tips for Kindle, formatting advice, and real examples."
+    />
+    <meta
+      name="keywords"
+      content="how to convert markdown to epub, markdown epub tutorial, step by step markdown ebook, kindle markdown tutorial, epub from markdown"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0e0e0f" />
+    <link rel="canonical" href="https://mdtoepub.com/how-to.html" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230e0e0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='48' font-weight='bold' fill='%23e8c97e'%3EE%3C/text%3E%3C/svg%3E"
+    />
+    <meta
+      property="og:title"
+      content="How to Convert Markdown to EPUB — Step-by-Step Tutorial"
+    />
+    <meta
+      property="og:description"
+      content="A beginner-friendly tutorial on converting Markdown files to EPUB for Kindle and e-readers."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://mdtoepub.com/how-to.html" />
+
+    <!-- Structured Data: HowTo -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Convert Markdown to EPUB",
+        "description": "Step-by-step tutorial on converting Markdown files to EPUB ebook format using mdtoepub.com",
+        "url": "https://mdtoepub.com/how-to.html",
+        "totalTime": "PT2M",
+        "tool": {
+          "@type": "HowToTool",
+          "name": "mdtoepub.com"
+        },
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Prepare your Markdown file",
+            "text": "Write or find a Markdown (.md) file you want to convert. Ensure it uses standard Markdown syntax with proper headings, paragraphs, and formatting."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Open the converter",
+            "text": "Visit mdtoepub.com and you'll see the converter interface with an editor on the left and a preview on the right."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Load your Markdown content",
+            "text": "Either paste your Markdown text into the editor, drag and drop a .md file, or click 'open' to browse for a file."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Review the preview",
+            "text": "Check the formatted preview on the right panel to make sure everything looks correct before generating the EPUB."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Set metadata",
+            "text": "Optionally set the ebook title, author name, and language in the fields below the editor."
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Generate and download",
+            "text": "Click 'Generate EPUB' to create and download your ebook file instantly."
+          }
+        ]
+      }
+    </script>
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4608381042047290"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0e0e0f;
+        --surface: #161618;
+        --surface2: #1e1e21;
+        --border: #2a2a2e;
+        --accent: #e8c97e;
+        --accent2: #7eb8e8;
+        --text: #e8e6e0;
+        --muted: #7a7870;
+        --success: #6ec97e;
+        --radius: 6px;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Source Serif 4", serif;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto auto auto 1fr auto;
+      }
+
+      header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--muted);
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      nav {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0;
+        transition: color 0.15s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: var(--accent);
+      }
+      nav .nav-spacer {
+        flex: 1;
+      }
+
+      .ad-banner {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        position: relative;
+      }
+      .ad-banner .ad-slot {
+        text-align: center;
+        max-width: 728px;
+        width: 100%;
+      }
+      .ad-banner .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      .content {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+      .content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+      .content .subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+      .content .meta-info {
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-bottom: 2rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .content h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        color: var(--text);
+        margin-top: 3rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .content h3 {
+        font-size: 1.1rem;
+        color: var(--accent2);
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .content p {
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .content ul,
+      .content ol {
+        padding-left: 1.5em;
+        margin-bottom: 1rem;
+      }
+      .content li {
+        margin-bottom: 0.4rem;
+      }
+      .content a {
+        color: var(--accent2);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .content strong {
+        color: var(--text);
+      }
+      .content code {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.82em;
+        background: var(--surface2);
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+        color: var(--accent);
+      }
+      .content pre {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1rem;
+        overflow-x: auto;
+        margin: 1rem 0 1.5rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
+      }
+      .content pre code {
+        background: none;
+        padding: 0;
+        color: var(--text);
+      }
+      .content blockquote {
+        border-left: 3px solid var(--accent);
+        margin: 1.5rem 0;
+        padding: 0.75rem 1.25rem;
+        color: var(--muted);
+        font-style: italic;
+        background: var(--surface);
+        border-radius: 0 var(--radius) var(--radius) 0;
+      }
+      .content hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2.5rem 0;
+      }
+
+      /* Step cards */
+      .step {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        position: relative;
+        padding-left: 4.5rem;
+      }
+      .step-number {
+        position: absolute;
+        left: 1.25rem;
+        top: 1.25rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #0e0e0f;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+      .step h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.1rem;
+        color: var(--text);
+        margin: 0 0 0.75rem;
+      }
+      .step p {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .tip-box {
+        background: var(--surface);
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      .tip-box .tip-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+      }
+      .tip-box p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .warning-box {
+        background: var(--surface);
+        border: 1px solid #e87e7e;
+        border-radius: var(--radius);
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      .warning-box .warning-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #e87e7e;
+        margin-bottom: 0.5rem;
+      }
+      .warning-box p {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .example-box {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin: 1.5rem 0;
+        overflow: hidden;
+      }
+      .example-box .example-header {
+        background: var(--surface);
+        padding: 0.5rem 1rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        border-bottom: 1px solid var(--border);
+      }
+      .example-box pre {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+      }
+
+      .cta-box {
+        background: var(--surface2);
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        padding: 2rem;
+        margin: 2rem 0;
+        text-align: center;
+      }
+      .cta-box h3 {
+        color: var(--accent);
+        margin-bottom: 0.75rem;
+        font-family: "Playfair Display", serif;
+      }
+      .cta-box p {
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+      .cta-box a.btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #0e0e0f;
+        padding: 0.7rem 1.5rem;
+        border-radius: var(--radius);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .cta-box a.btn:hover {
+        filter: brightness(1.1);
+      }
+
+      .ad-mid {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.75rem;
+        margin: 2rem 0;
+        text-align: center;
+        position: relative;
+      }
+      .ad-mid .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.45rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      footer {
+        padding: 1.2rem 1.5rem 0.8rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a href="/" class="logo">MD → EPUB <span>converter</span></a>
+      </header>
+
+      <nav>
+        <a href="/">Converter</a>
+        <a href="/guide.html">Guide</a>
+        <a href="/how-to.html" class="active">How-To</a>
+        <a href="/about.html">About</a>
+        <span class="nav-spacer"></span>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+
+      <div class="ad-banner">
+        <div class="ad-slot">
+          <ins
+            class="adsbygoogle"
+            style="display: inline-block; width: 728px; height: 90px"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <span class="ad-label">sponsored</span>
+      </div>
+
+      <div class="content">
+        <h1>How to Convert Markdown to EPUB</h1>
+        <p class="subtitle">
+          A step-by-step tutorial for creating ebooks from Markdown files.
+        </p>
+        <p class="meta-info">Updated March 19, 2026 · 8 min read</p>
+
+        <p>
+          This tutorial walks you through the entire process of converting a
+          Markdown file into an EPUB ebook using <a href="/">mdtoepub.com</a>.
+          Whether you're creating your first ebook or your hundredth, these
+          steps will help you get a professional result in under a minute.
+        </p>
+
+        <h2>Before You Start</h2>
+        <p>Here's what you'll need:</p>
+        <ul>
+          <li>
+            A <strong>Markdown file</strong> (.md) or Markdown text you want to
+            convert
+          </li>
+          <li>
+            A <strong>modern web browser</strong> (Chrome, Firefox, Safari, Edge
+            — any will work)
+          </li>
+          <li>
+            Optionally: your ebook's <strong>title</strong>,
+            <strong>author name</strong>, and preferred
+            <strong>language</strong>
+          </li>
+        </ul>
+        <p>
+          That's it. No account, no download, no installation required. The
+          converter runs entirely in your browser — your content never leaves
+          your device.
+        </p>
+
+        <h2>Step-by-Step Tutorial</h2>
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Prepare Your Markdown Content</h3>
+          <p>
+            If you already have a <code>.md</code> file, you're ready to go. If
+            you're starting from scratch, write your content in any text editor
+            using Markdown syntax. Here's a minimal example:
+          </p>
+        </div>
+
+        <div class="example-box">
+          <div class="example-header">Example: Simple Markdown Document</div>
+          <pre><code># My First Ebook
+
+## Chapter 1: Getting Started
+
+This is the first chapter of my ebook. I wrote it in
+**Markdown** because it's simple and clean.
+
+Here are some things I love:
+
+- Reading on my Kindle
+- Writing in plain text
+- Converting to EPUB with one click
+
+## Chapter 2: The Journey
+
+> "The best time to start writing was yesterday.
+> The second best time is now."
+
+This chapter continues the story...
+
+---
+
+*Thanks for reading!*</code></pre>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-label">💡 Tip: File Encoding</div>
+          <p>
+            Make sure your Markdown file is saved as <strong>UTF-8</strong>.
+            This is the default in most modern editors (VS Code, Sublime Text,
+            Notepad++, etc.) and ensures special characters like accents,
+            em-dashes, and non-Latin scripts render correctly in the EPUB.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Open the Converter</h3>
+          <p>
+            Go to <a href="/">mdtoepub.com</a>. You'll see a split-screen
+            interface:
+          </p>
+          <ul>
+            <li>
+              <strong>Left panel:</strong> The Markdown editor where you input
+              your content
+            </li>
+            <li>
+              <strong>Right panel:</strong> A live preview showing how your
+              content will look
+            </li>
+          </ul>
+          <p>
+            Below the editor, you'll find metadata fields (title, author,
+            language) and the "Generate EPUB" button.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Load Your Markdown</h3>
+          <p>You have three ways to get your content into the editor:</p>
+          <ul>
+            <li>
+              <strong>Paste:</strong> Copy your Markdown text and paste it
+              directly into the editor (Ctrl+V / Cmd+V)
+            </li>
+            <li>
+              <strong>Drag &amp; Drop:</strong> Drag a <code>.md</code> file
+              from your file explorer and drop it onto the editor area
+            </li>
+            <li>
+              <strong>Open file:</strong> Click the "open" button in the editor
+              toolbar and browse for your file
+            </li>
+          </ul>
+          <p>
+            As soon as your content is in the editor, the live preview on the
+            right will update automatically. This shows you exactly how your
+            Markdown will be formatted in the EPUB.
+          </p>
+        </div>
+
+        <div class="tip-box">
+          <div class="tip-label">💡 Tip: Try the Sample First</div>
+          <p>
+            If this is your first time using the converter, click the
+            <strong>"sample"</strong> button in the editor toolbar to load a
+            pre-written example. This lets you see the full workflow before
+            using your own content.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Review the Preview</h3>
+          <p>Carefully check the preview panel on the right. Look for:</p>
+          <ul>
+            <li>Are headings displaying at the correct levels?</li>
+            <li>Is bold and italic text rendering properly?</li>
+            <li>Are lists properly indented?</li>
+            <li>Do code blocks appear with monospace formatting?</li>
+            <li>Are links and images working?</li>
+          </ul>
+          <p>
+            If something looks wrong, edit the Markdown in the left panel. The
+            preview updates in real-time (with a small ~120ms delay for
+            performance).
+          </p>
+        </div>
+
+        <div class="warning-box">
+          <div class="warning-label">⚠ Common Mistake</div>
+          <p>
+            Make sure there's a <strong>space after the hash symbol</strong> in
+            headings. <code>#Heading</code> won't work — it needs to be
+            <code># Heading</code> (with a space). This is the most common
+            Markdown formatting error.
+          </p>
+        </div>
+
+        <!-- Mid-content ad -->
+        <div class="ad-mid">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          <span class="ad-label">sponsored</span>
+        </div>
+
+        <div class="step">
+          <div class="step-number">5</div>
+          <h3>Set Ebook Metadata</h3>
+          <p>Below the editor, you'll find three metadata fields:</p>
+          <ul>
+            <li>
+              <strong>Title:</strong> The name of your ebook. If left blank, the
+              converter uses the first H1 heading in your Markdown. If there's
+              no H1, it defaults to "Article".
+            </li>
+            <li>
+              <strong>Author:</strong> Your name or pen name. Defaults to
+              "Unknown" if left blank.
+            </li>
+            <li>
+              <strong>Language:</strong> Select from English, Portuguese,
+              Spanish, French, or German. This affects hyphenation and
+              text-to-speech behavior on e-readers.
+            </li>
+          </ul>
+          <p>
+            Setting proper metadata is important because it's what appears in
+            your e-reader's library. A well-titled ebook is easier to find among
+            hundreds of documents.
+          </p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">6</div>
+          <h3>Generate and Download the EPUB</h3>
+          <p>
+            Click the golden <strong>"Generate EPUB"</strong> button. Within
+            less than a second:
+          </p>
+          <ol>
+            <li>The converter parses your Markdown into semantic HTML</li>
+            <li>
+              Wraps the HTML in EPUB 3 structure (XHTML, OPF, navigation, CSS)
+            </li>
+            <li>
+              Packages everything into a ZIP file with
+              <code>.epub</code> extension
+            </li>
+            <li>Triggers a download in your browser</li>
+          </ol>
+          <p>
+            The EPUB file is saved to your default downloads folder. The
+            filename is based on your ebook title (slugified), for example:
+            <code>my-first-ebook.epub</code>.
+          </p>
+          <p>
+            The status bar below the button will show the filename and file size
+            (typically 5-50 KB for text-only ebooks).
+          </p>
+        </div>
+
+        <h2>What to Do With Your EPUB</h2>
+        <p>
+          Now that you have an EPUB file, here's how to read it on different
+          devices and platforms:
+        </p>
+
+        <h3>On Amazon Kindle</h3>
+        <p>
+          Kindle has natively supported EPUB since late 2022. You have several
+          options:
+        </p>
+        <ol>
+          <li>
+            <strong>Email it:</strong> Send the EPUB file as an email attachment
+            to your Kindle's email address (found in Amazon account settings →
+            Devices → Kindle → Email). The ebook will appear in your Kindle
+            library within a few minutes.
+          </li>
+          <li>
+            <strong>Use the Send to Kindle app:</strong> Download Amazon's free
+            <a
+              href="https://www.amazon.com/sendtokindle"
+              target="_blank"
+              rel="noopener"
+              >Send to Kindle</a
+            >
+            desktop app. Drag and drop your EPUB file onto the app.
+          </li>
+          <li>
+            <strong>USB cable:</strong> Connect Kindle via USB, and copy the
+            EPUB to the <code>Documents</code> folder on the device.
+          </li>
+        </ol>
+
+        <h3>On Kobo</h3>
+        <p>
+          Kobo e-readers natively support EPUB. Connect your Kobo via USB and
+          drag the file into the device's storage. It will appear in your
+          library immediately. Alternatively, use Kobo's built-in browser to
+          download the file directly.
+        </p>
+
+        <h3>On Apple Books (iPhone, iPad, Mac)</h3>
+        <p>
+          On macOS, double-click the EPUB file and it will open in Apple Books.
+          On iOS/iPadOS, you can AirDrop the file to your device, email it to
+          yourself and open the attachment, or save it to Files and open with
+          Apple Books.
+        </p>
+
+        <h3>On Google Play Books</h3>
+        <p>
+          Go to
+          <a href="https://play.google.com/books" target="_blank" rel="noopener"
+            >play.google.com/books</a
+          >, click the upload button, and select your EPUB file. It will sync to
+          all devices with the Google Play Books app installed.
+        </p>
+
+        <h3>On a Computer</h3>
+        <p>For reading EPUBs on your computer, you can use:</p>
+        <ul>
+          <li>
+            <strong>Calibre</strong> — free, open-source ebook management and
+            reader (Windows, Mac, Linux)
+          </li>
+          <li>
+            <strong>Thorium Reader</strong> — free, modern EPUB reader (Windows,
+            Mac, Linux)
+          </li>
+          <li>
+            <strong>Microsoft Edge</strong> — has built-in EPUB support on
+            Windows
+          </li>
+          <li><strong>Apple Books</strong> — built into macOS</li>
+        </ul>
+
+        <hr />
+
+        <h2>Real-World Examples</h2>
+        <p>
+          Here are some practical scenarios showing how people use the Markdown
+          to EPUB converter:
+        </p>
+
+        <h3>Example 1: Blog Post to Ebook</h3>
+        <p>
+          Sarah is a food blogger who writes recipes in Markdown. She wants to
+          create a collection of her best recipes as a downloadable EPUB for her
+          newsletter subscribers. She concatenates 20 recipe Markdown files into
+          one document, with each recipe under an H2 heading, pastes it into the
+          converter, sets the title to "Sarah's Kitchen: 20 Favorite Recipes",
+          and downloads the EPUB.
+        </p>
+
+        <h3>Example 2: Developer Documentation</h3>
+        <p>
+          Alex maintains an open-source library on GitHub. His README is
+          comprehensive but hard to read on a phone. He copies the README into
+          the converter, generates an EPUB, and sends it to his Kindle for
+          comfortable reading during his commute.
+        </p>
+
+        <h3>Example 3: Academic Notes</h3>
+        <p>
+          Maria is a university student who takes lecture notes in Markdown
+          using Obsidian. Before exams, she consolidates her notes for each
+          subject into a single Markdown file and converts it to EPUB. She reads
+          the notes on her Kobo e-reader in the library — no screen glare, no
+          social media distractions, longer battery life than a laptop.
+        </p>
+
+        <h3>Example 4: Fiction Writing</h3>
+        <p>
+          Tom is writing a novel in Markdown using iA Writer. After finishing
+          each draft, he converts it to EPUB and sends it to his Kindle for
+          proofreading. Reading his own work on an e-reader (a different medium
+          than where he writes) helps him catch typos and pacing issues he'd
+          otherwise miss.
+        </p>
+
+        <!-- Mid-content ad -->
+        <div class="ad-mid">
+          <ins
+            class="adsbygoogle"
+            style="display: block"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          <span class="ad-label">sponsored</span>
+        </div>
+
+        <h2>Tips for Better EPUB Output</h2>
+        <p>
+          Follow these tips to get the best possible ebook from your Markdown:
+        </p>
+
+        <h3>1. Structure Your Content with Headings</h3>
+        <p>
+          Use H1 for the main title, H2 for chapters or major sections, and H3
+          for subsections. E-readers use headings for navigation, so a
+          well-structured document creates a better reading experience.
+        </p>
+
+        <h3>2. Keep Paragraphs Short</h3>
+        <p>
+          E-reader screens are small. Long paragraphs become intimidating walls
+          of text. Aim for 3-5 sentences per paragraph for optimal readability.
+        </p>
+
+        <h3>3. Use Formatting Sparingly</h3>
+        <p>
+          Bold and italic text are powerful tools when used sparingly. If
+          everything is emphasized, nothing stands out. Use bold for key terms
+          and italic for emphasis, titles, and foreign words.
+        </p>
+
+        <h3>4. Test on Your Target Device</h3>
+        <p>
+          If you're primarily reading on Kindle, test the EPUB on your Kindle
+          device or the Kindle app. Different e-readers render content slightly
+          differently, and what looks perfect in the preview might need small
+          adjustments for your specific device.
+        </p>
+
+        <h3>5. Set Meaningful Metadata</h3>
+        <p>
+          A title like "Untitled" or "Document" makes your ebook hard to find in
+          a library of hundreds. Take a few seconds to set a clear title and
+          your author name.
+        </p>
+
+        <h3>6. Use Section Dividers</h3>
+        <p>
+          Use horizontal rules (<code>---</code>) to create visual breaks
+          between major sections. In the EPUB, these render as a subtle line
+          that helps readers understand the document's structure.
+        </p>
+
+        <h3>7. Preview Before Downloading</h3>
+        <p>
+          Always check the live preview before generating the EPUB. It's much
+          easier to fix formatting in the editor than to regenerate the file.
+        </p>
+
+        <hr />
+
+        <h2>Frequently Asked Questions</h2>
+
+        <p>
+          <strong
+            >Q: Can I convert multiple Markdown files into one EPUB?</strong
+          >
+        </p>
+        <p>
+          Currently, the converter handles one Markdown input at a time. To
+          combine multiple files, concatenate them in a text editor (with H2
+          headings separating each section) before pasting into the converter.
+        </p>
+
+        <p><strong>Q: Is there a file size limit?</strong></p>
+        <p>
+          There's no hard limit since everything runs in your browser. However,
+          extremely large documents (over 1 million characters) may cause your
+          browser to slow down during preview rendering. For very large books,
+          consider splitting into volumes.
+        </p>
+
+        <p><strong>Q: Can I customize the EPUB's styling?</strong></p>
+        <p>
+          The converter uses a carefully designed CSS stylesheet optimized for
+          e-readers. Currently, custom CSS is not supported through the web
+          interface, but we're working on adding theme options in a future
+          update.
+        </p>
+
+        <p>
+          <strong>Q: Does it support right-to-left (RTL) languages?</strong>
+        </p>
+        <p>
+          The EPUB structure supports RTL languages, but the current CSS is
+          optimized for LTR scripts. RTL languages like Arabic and Hebrew may
+          require manual CSS adjustments in the generated EPUB.
+        </p>
+
+        <p><strong>Q: Can I use this for commercial ebooks?</strong></p>
+        <p>
+          Absolutely. There are no restrictions on how you use the EPUB files
+          generated by this tool. You retain full ownership of your content.
+        </p>
+
+        <hr />
+
+        <div class="cta-box">
+          <h3>Ready to Create Your Ebook?</h3>
+          <p>
+            Open the converter, paste your Markdown, and download your EPUB in
+            seconds.
+          </p>
+          <a href="/" class="btn">Start Converting →</a>
+        </div>
+
+        <p>
+          <em
+            >Need more background? Check out our
+            <a href="/guide.html">Complete Guide to Markdown and EPUB</a> for
+            in-depth explanations of both formats, advanced techniques, and
+            troubleshooting tips.</em
+          >
+        </p>
+      </div>
+
+      <footer>
+        <div class="footer-top">
+          <div class="footer-links">
+            <a href="/">Converter</a>
+            <a href="/guide.html">Markdown to EPUB Guide</a>
+            <a href="/how-to.html">How-To Tutorial</a>
+            <a href="/about.html">About &amp; Contact</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >© 2025–2026 mdtoepub.com — Runs entirely in the browser, no data is
+            sent to any server</span
+          >
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

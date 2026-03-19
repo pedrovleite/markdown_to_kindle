@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta name="google-adsense-account" content="ca-pub-4608381042047290" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Markdown to EPUB Converter (mdtoepub.com)</title>
+    <meta
+      name="description"
+      content="Learn about mdtoepub.com, the free browser-based Markdown to EPUB converter. Meet the team, understand our mission, and find contact information."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0e0e0f" />
+    <link rel="canonical" href="https://mdtoepub.com/about.html" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%230e0e0f'/%3E%3Ctext x='50' y='68' text-anchor='middle' font-family='Georgia,serif' font-size='48' font-weight='bold' fill='%23e8c97e'%3EE%3C/text%3E%3C/svg%3E"
+    />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4608381042047290"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #0e0e0f;
+        --surface: #161618;
+        --surface2: #1e1e21;
+        --border: #2a2a2e;
+        --accent: #e8c97e;
+        --accent2: #7eb8e8;
+        --text: #e8e6e0;
+        --muted: #7a7870;
+        --radius: 6px;
+      }
+
+      html,
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Source Serif 4", serif;
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .shell {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: auto auto auto 1fr auto;
+      }
+
+      header {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .logo {
+        font-family: "Playfair Display", serif;
+        font-size: 1.4rem;
+        letter-spacing: -0.02em;
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .logo span {
+        color: var(--muted);
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+      }
+
+      nav {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0;
+        transition: color 0.15s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: var(--accent);
+      }
+      nav .nav-spacer {
+        flex: 1;
+      }
+
+      .ad-banner {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 60px;
+        position: relative;
+      }
+      .ad-banner .ad-slot {
+        text-align: center;
+        max-width: 728px;
+        width: 100%;
+      }
+      .ad-banner .ad-label {
+        position: absolute;
+        top: 4px;
+        right: 12px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        opacity: 0.5;
+      }
+
+      .content {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+      .content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+      .content .subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+      }
+      .content h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 1.25rem;
+        color: var(--text);
+        margin-top: 2.5rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .content h3 {
+        font-size: 1.05rem;
+        color: var(--accent2);
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .content p {
+        margin-bottom: 1rem;
+        color: var(--text);
+      }
+      .content ul,
+      .content ol {
+        padding-left: 1.5em;
+        margin-bottom: 1rem;
+      }
+      .content li {
+        margin-bottom: 0.4rem;
+      }
+      .content a {
+        color: var(--accent2);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .content strong {
+        color: var(--text);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.25rem;
+      }
+      .card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        color: var(--accent);
+        margin: 0 0 0.5rem;
+        border: none;
+      }
+      .card p {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .contact-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+      .contact-box p {
+        margin-bottom: 0.5rem;
+      }
+
+      footer {
+        padding: 1.2rem 1.5rem 0.8rem;
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 10px;
+      }
+
+      @media (max-width: 600px) {
+        .card-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a href="/" class="logo">MD → EPUB <span>converter</span></a>
+      </header>
+
+      <nav>
+        <a href="/">Converter</a>
+        <a href="/guide.html">Guide</a>
+        <a href="/how-to.html">How-To</a>
+        <a href="/about.html" class="active">About</a>
+        <span class="nav-spacer"></span>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+
+      <div class="ad-banner">
+        <div class="ad-slot">
+          <ins
+            class="adsbygoogle"
+            style="display: inline-block; width: 728px; height: 90px"
+            data-ad-client="ca-pub-4608381042047290"
+            data-ad-slot="9952723938"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
+        <span class="ad-label">sponsored</span>
+      </div>
+
+      <div class="content">
+        <h1>About mdtoepub.com</h1>
+        <p class="subtitle">
+          A free, privacy-first tool for converting Markdown to EPUB — built by
+          writers, for writers.
+        </p>
+
+        <h2>Our Mission</h2>
+        <p>
+          We believe that converting Markdown to ebook format should be
+          <strong>simple, free, and private</strong>. Too many online tools
+          require uploads, accounts, or subscriptions for what should be a
+          straightforward conversion. That's why we built mdtoepub.com — a tool
+          that runs entirely in your browser, keeps your data on your device,
+          and costs nothing to use.
+        </p>
+        <p>
+          Our goal is to make ebook publishing accessible to everyone. Whether
+          you're an indie author writing your first novel, a student compiling
+          study notes, a developer documenting a project, or a blogger turning
+          posts into ebooks — we want to help you get from Markdown to a
+          polished EPUB in seconds.
+        </p>
+
+        <h2>How It Started</h2>
+        <p>
+          This project was born out of frustration. As writers and developers
+          who use Markdown daily, we wanted a quick way to convert our notes and
+          drafts into EPUB for comfortable reading on a Kindle. The existing
+          tools were either too complex (requiring command-line setup), too
+          expensive (monthly subscriptions), or too invasive (requiring file
+          uploads to unknown servers).
+        </p>
+        <p>
+          So we built our own: a single-page app that uses JavaScript, the
+          excellent <strong>Marked</strong> library for Markdown parsing, and
+          <strong>JSZip</strong> for EPUB packaging. The result is instantaneous
+          conversion with zero server contact.
+        </p>
+
+        <h2>Our Values</h2>
+        <div class="card-grid">
+          <div class="card">
+            <h3>🔒 Privacy First</h3>
+            <p>
+              Your content never leaves your device. All processing is
+              client-side. We can't see your data even if we wanted to.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🆓 Truly Free</h3>
+            <p>
+              No premium tiers, no file limits, no watermarks. The full tool is
+              100% free, supported by unobtrusive ads.
+            </p>
+          </div>
+          <div class="card">
+            <h3>⚡ Simple & Fast</h3>
+            <p>
+              Paste, click, download. No signup, no email verification, no
+              learning curve. It just works.
+            </p>
+          </div>
+          <div class="card">
+            <h3>📖 Open Standards</h3>
+            <p>
+              We generate valid EPUB 3 files that work on every major e-reader:
+              Kindle, Kobo, Apple Books, and more.
+            </p>
+          </div>
+        </div>
+
+        <h2>Technical Details</h2>
+        <p>
+          For the technically curious, here's how the converter works under the
+          hood:
+        </p>
+        <ul>
+          <li>
+            <strong>Markdown Parsing:</strong> We use the
+            <a href="https://marked.js.org/" target="_blank" rel="noopener"
+              >Marked</a
+            >
+            library (v9.x) with GitHub Flavored Markdown (GFM) enabled to parse
+            your Markdown into semantic HTML.
+          </li>
+          <li>
+            <strong>EPUB Assembly:</strong> The HTML content is wrapped in
+            XHTML, combined with a CSS stylesheet optimized for e-readers,
+            metadata (OPF package file), navigation document (NCX/nav), and
+            packaged into a ZIP container with EPUB-compliant structure using
+            <a
+              href="https://stuk.github.io/jszip/"
+              target="_blank"
+              rel="noopener"
+              >JSZip</a
+            >.
+          </li>
+          <li>
+            <strong>EPUB 3 Standard:</strong> The output conforms to the EPUB
+            3.0 specification with proper MIME type declarations, a
+            container.xml, content.opf metadata, and nav.xhtml table of
+            contents.
+          </li>
+          <li>
+            <strong>Client-Side Only:</strong> The entire workflow executes in
+            your browser's JavaScript engine. The generated file is created as a
+            Blob and downloaded via a temporary URL — no network requests are
+            made during conversion.
+          </li>
+        </ul>
+
+        <h2>Frequently Asked Questions</h2>
+        <p><strong>Who is behind mdtoepub.com?</strong></p>
+        <p>
+          The site was created by a small team of developers and writers who are
+          passionate about ebooks and open formats. We're based in Europe and
+          maintain this as an independent project.
+        </p>
+        <p><strong>How is the site funded?</strong></p>
+        <p>
+          The site is supported by advertising through Google AdSense. This
+          allows us to keep the tool completely free without compromising on
+          features. We strive to keep ads unobtrusive and clearly labeled.
+        </p>
+        <p><strong>Can I contribute or report a bug?</strong></p>
+        <p>
+          Absolutely! We welcome feedback, bug reports, and feature suggestions.
+          Please reach out using the contact information below.
+        </p>
+        <p><strong>Will you add more features?</strong></p>
+        <p>
+          We're actively working on improvements including custom CSS themes for
+          EPUB output, multi-file chapter support, cover image generation, and
+          more language options. Stay tuned!
+        </p>
+
+        <h2>Contact Us</h2>
+        <div class="contact-box">
+          <p>
+            We'd love to hear from you! Reach us through any of these channels:
+          </p>
+          <ul>
+            <li><strong>General inquiries:</strong> contact@mdtoepub.com</li>
+            <li><strong>Privacy questions:</strong> privacy@mdtoepub.com</li>
+            <li>
+              <strong>Bug reports &amp; features:</strong> feedback@mdtoepub.com
+            </li>
+            <li><strong>Legal matters:</strong> legal@mdtoepub.com</li>
+          </ul>
+          <p>We typically respond within 48 hours on business days.</p>
+        </div>
+
+        <h2>Acknowledgments</h2>
+        <p>
+          This project wouldn't be possible without the amazing open-source
+          community. Special thanks to:
+        </p>
+        <ul>
+          <li>
+            <a href="https://marked.js.org/" target="_blank" rel="noopener"
+              >Marked.js</a
+            >
+            — the fast Markdown parser
+          </li>
+          <li>
+            <a
+              href="https://stuk.github.io/jszip/"
+              target="_blank"
+              rel="noopener"
+              >JSZip</a
+            >
+            — JavaScript ZIP library
+          </li>
+          <li>
+            <a href="https://fonts.google.com/" target="_blank" rel="noopener"
+              >Google Fonts</a
+            >
+            — beautiful open-source typefaces
+          </li>
+          <li>
+            The
+            <a
+              href="https://www.w3.org/publishing/epub3/"
+              target="_blank"
+              rel="noopener"
+              >EPUB 3 specification</a
+            >
+            maintained by the W3C
+          </li>
+          <li>
+            John Gruber for creating
+            <a
+              href="https://daringfireball.net/projects/markdown/"
+              target="_blank"
+              rel="noopener"
+              >Markdown</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <footer>
+        <div class="footer-top">
+          <div class="footer-links">
+            <a href="/">Converter</a>
+            <a href="/guide.html">Markdown to EPUB Guide</a>
+            <a href="/how-to.html">How-To Tutorial</a>
+            <a href="/about.html">About &amp; Contact</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >© 2025–2026 mdtoepub.com — Runs entirely in the browser, no data is
+            sent to any server</span
+          >
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -586,14 +586,67 @@
       }
 
       footer {
-        padding: 0.6rem 1.5rem;
+        padding: 1.2rem 1.5rem 0.8rem;
         border-top: 1px solid var(--border);
-        background: var(--bg);
+        background: var(--surface);
         font-family: "JetBrains Mono", monospace;
         font-size: 0.65rem;
         color: var(--muted);
         display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .footer-top {
+        display: flex;
         justify-content: space-between;
+        align-items: center;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--accent);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* — Navigation — */
+      nav {
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        padding: 0.4rem 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.3rem 0;
+        transition: color 0.15s;
+      }
+      nav a:hover,
+      nav a.active {
+        color: var(--accent);
+      }
+      nav .nav-spacer {
+        flex: 1;
       }
 
       /* Scrollbar */
@@ -760,6 +813,16 @@
         <div class="badge">browser · no server</div>
       </header>
 
+      <nav>
+        <a href="/" class="active">Converter</a>
+        <a href="/guide.html">Guide</a>
+        <a href="/how-to.html">How-To</a>
+        <a href="/about.html">About</a>
+        <span class="nav-spacer"></span>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+      </nav>
+
       <main>
         <!-- LEFT: Editor -->
         <div class="panel">
@@ -873,10 +936,23 @@ Start writing..."
       </main>
 
       <footer>
-        <span
-          >Runs entirely in the browser — no data is sent to any server</span
-        >
-        <span id="wordCount">0 words</span>
+        <div class="footer-top">
+          <div class="footer-links">
+            <a href="/">Converter</a>
+            <a href="/guide.html">Markdown to EPUB Guide</a>
+            <a href="/how-to.html">How-To Tutorial</a>
+            <a href="/about.html">About &amp; Contact</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span
+            >© 2025–2026 mdtoepub.com — Runs entirely in the browser, no data is
+            sent to any server</span
+          >
+          <span id="wordCount">0 words</span>
+        </div>
       </footer>
     </div>
 
@@ -891,63 +967,224 @@ Start writing..."
           <strong>Kindle</strong>, Kobo, Apple Books, and any e-reader that
           supports EPUB.
         </p>
+        <p>
+          Whether you're a writer drafting your next novel in Markdown, a
+          developer documenting a project, or a student organizing lecture
+          notes, this tool bridges the gap between plain text authoring and
+          polished ebook publishing. The entire conversion happens client-side
+          using JavaScript, so your content stays private and offline-capable.
+        </p>
 
         <h2>How It Works</h2>
+        <p>
+          The conversion process is straightforward and takes just a few
+          seconds:
+        </p>
         <ol>
           <li>
-            <strong>Paste or drag</strong> your Markdown file into the editor
+            <strong>Paste or drag</strong> your Markdown file into the editor on
+            the left panel
           </li>
-          <li><strong>Preview</strong> the formatted output in real time</li>
           <li>
-            Set optional <strong>metadata</strong> (title, author, language)
+            <strong>Preview</strong> the formatted output in real time on the
+            right panel — what you see is what you'll get in the EPUB
           </li>
-          <li>Click <strong>"Generate EPUB"</strong> to download your ebook</li>
+          <li>
+            Set optional <strong>metadata</strong> (title, author, language) in
+            the fields below the editor
+          </li>
+          <li>
+            Click <strong>"Generate EPUB"</strong> to download your ebook
+            instantly
+          </li>
         </ol>
+        <p>
+          Under the hood, the converter parses your Markdown using a
+          standards-compliant parser with
+          <strong>GitHub Flavored Markdown (GFM)</strong> support, generates
+          valid XHTML content, wraps it in a properly structured EPUB 3
+          container with metadata and a table of contents, and packages
+          everything into a ZIP file with the <code>.epub</code> extension. The
+          resulting file is compatible with all major e-readers including Amazon
+          Kindle, Kobo, Apple Books, Google Play Books, and more.
+        </p>
 
         <h2>Why Use This Converter?</h2>
         <ul>
           <li>
             <strong>100% Free</strong> — no limits, no watermarks, no hidden
-            fees
+            fees, no premium tier
           </li>
           <li>
-            <strong>Private</strong> — runs entirely in your browser with
-            JavaScript; nothing is sent to a server
+            <strong>Private &amp; Secure</strong> — runs entirely in your
+            browser with JavaScript; nothing is sent to a server. Your
+            intellectual property stays on your device at all times.
           </li>
           <li>
-            <strong>Fast</strong> — EPUB generation takes less than a second
+            <strong>Fast</strong> — EPUB generation takes less than a second,
+            even for documents with hundreds of pages
           </li>
           <li>
             <strong>Kindle-Ready</strong> — output is optimized for Kindle and
-            all major e-readers
+            all major e-readers with proper CSS styling for readability
           </li>
           <li>
             <strong>GFM Support</strong> — full GitHub Flavored Markdown
-            including tables, code blocks, and task lists
+            including tables, code blocks, task lists, strikethrough, and
+            autolinks
           </li>
           <li>
-            <strong>No Install</strong> — works on any device with a modern
-            browser (Windows, Mac, Linux, mobile)
+            <strong>No Install Required</strong> — works on any device with a
+            modern browser (Windows, Mac, Linux, iOS, Android)
+          </li>
+          <li>
+            <strong>Custom Metadata</strong> — set the ebook title, author name,
+            and language for proper cataloguing on your e-reader
+          </li>
+          <li>
+            <strong>Offline Capable</strong> — once the page loads, you can use
+            it without an internet connection
           </li>
         </ul>
+
+        <h2>Understanding EPUB Format</h2>
+        <p>
+          EPUB (Electronic Publication) is the most widely adopted open standard
+          for ebooks. It was developed by the
+          <strong>International Digital Publishing Forum (IDPF)</strong>, now
+          part of the W3C. EPUB files are essentially ZIP archives containing
+          XHTML content, CSS for styling, images, and XML metadata files.
+        </p>
+        <p>
+          The EPUB 3 standard (which this tool generates) supports reflowable
+          text, meaning the content adapts to any screen size — from a 6-inch
+          Kindle to a 12.9-inch iPad. This makes EPUB ideal for text-heavy
+          content like novels, technical documentation, academic papers, and
+          personal notes.
+        </p>
+        <p>
+          Unlike PDF, which preserves fixed page layouts, EPUB allows the reader
+          to customize font size, margins, and background color for optimal
+          reading comfort. This is why most e-reader devices and apps prefer
+          EPUB as their primary format.
+        </p>
+
+        <h2>Why Markdown for Writing?</h2>
+        <p>
+          <strong>Markdown</strong> was created by John Gruber in 2004 as a
+          lightweight markup language designed to be easy to read and write in
+          plain text. Since then, it has become the de facto standard for
+          writing technical documentation, README files, blog posts, and even
+          entire books.
+        </p>
+        <p>The key advantages of writing in Markdown include:</p>
+        <ul>
+          <li>
+            <strong>Simplicity</strong> — no need to learn complex word
+            processor features; just type with simple formatting rules
+          </li>
+          <li>
+            <strong>Portability</strong> — plain text files work everywhere and
+            will always be readable, even decades from now
+          </li>
+          <li>
+            <strong>Version control friendly</strong> — Markdown files work
+            perfectly with Git and other version control systems
+          </li>
+          <li>
+            <strong>Focus on content</strong> — without formatting distractions,
+            writers can focus on what matters: the words
+          </li>
+          <li>
+            <strong>Convertible</strong> — Markdown can be converted to HTML,
+            PDF, EPUB, DOCX, and many other formats
+          </li>
+        </ul>
+        <p>
+          By combining Markdown's simplicity with EPUB's universal
+          compatibility, this converter gives you the best of both worlds: easy
+          writing and professional ebook output.
+        </p>
 
         <h2>Supported Markdown Features</h2>
         <p>
           The converter supports all standard Markdown syntax plus GitHub
-          Flavored Markdown (GFM):
+          Flavored Markdown (GFM), including:
         </p>
         <ul>
-          <li>Headings (H1–H6), paragraphs, line breaks</li>
+          <li>Headings (H1–H6), paragraphs, and line breaks</li>
           <li>
-            <strong>Bold</strong>, <em>italic</em>, and strikethrough text
+            <strong>Bold</strong>, <em>italic</em>, and ~~strikethrough~~ text
+            formatting
           </li>
-          <li>Ordered and unordered lists</li>
-          <li>Links and images</li>
-          <li>Code blocks with syntax formatting</li>
-          <li>Blockquotes</li>
-          <li>Tables</li>
-          <li>Horizontal rules</li>
+          <li>Ordered and unordered lists, including nested lists</li>
+          <li>Links (inline and reference-style) and images (with alt text)</li>
+          <li>Fenced code blocks with language hints for syntax formatting</li>
+          <li>Inline code with backtick notation</li>
+          <li>Blockquotes for cited or highlighted text</li>
+          <li>Tables with alignment support (GFM extension)</li>
+          <li>Horizontal rules for section breaks</li>
+          <li>Task lists / checkboxes (GFM extension)</li>
+          <li>Autolinks for URLs and email addresses (GFM extension)</li>
         </ul>
+
+        <h2>Use Cases</h2>
+        <p>
+          This converter is used by thousands of people for a variety of
+          purposes:
+        </p>
+        <ul>
+          <li>
+            <strong>Authors &amp; Writers</strong> — Draft manuscripts in
+            Markdown, convert to EPUB for beta readers or personal review on
+            Kindle
+          </li>
+          <li>
+            <strong>Students</strong> — Compile lecture notes, research
+            summaries, or thesis chapters into readable ebooks
+          </li>
+          <li>
+            <strong>Developers</strong> — Convert project documentation,
+            changelogs, or README files into ebooks for offline reading
+          </li>
+          <li>
+            <strong>Bloggers</strong> — Repurpose blog posts as downloadable
+            EPUB ebooks for their audience
+          </li>
+          <li>
+            <strong>Educators</strong> — Create course materials and reading
+            lists in ebook format for students
+          </li>
+          <li>
+            <strong>Translators</strong> — Convert translated texts from
+            Markdown to ebook format for review
+          </li>
+        </ul>
+
+        <h2>How to Send EPUB to Kindle</h2>
+        <p>
+          Amazon Kindle now natively supports EPUB files (since 2022). There are
+          several ways to get your converted EPUB onto your Kindle device:
+        </p>
+        <ol>
+          <li>
+            <strong>Send to Kindle by Email</strong> — Email the EPUB file to
+            your Kindle email address (found in your Amazon account settings).
+            The file will appear in your Kindle library within minutes.
+          </li>
+          <li>
+            <strong>Send to Kindle App</strong> — Use Amazon's free "Send to
+            Kindle" desktop application to transfer files via drag-and-drop.
+          </li>
+          <li>
+            <strong>USB Transfer</strong> — Connect your Kindle via USB and copy
+            the EPUB file to the "Documents" folder.
+          </li>
+          <li>
+            <strong>Kindle App</strong> — Open the EPUB file directly in the
+            Kindle app on iOS, Android, or desktop.
+          </li>
+        </ol>
 
         <h2>Frequently Asked Questions</h2>
         <details>
@@ -962,21 +1199,25 @@ Start writing..."
           <summary>Is this Markdown to EPUB converter free?</summary>
           <p>
             Yes, it is 100% free with no limits. There is no signup, no
-            watermark, and no file size restrictions.
+            watermark, and no file size restrictions. There is no premium
+            version — all features are available to everyone.
           </p>
         </details>
         <details>
           <summary>Does my data stay private?</summary>
           <p>
             Yes. Everything runs in your browser using JavaScript. No data is
-            ever uploaded to a server. Your files never leave your device.
+            ever uploaded to a server. Your files never leave your device. We
+            don't collect, store, or have access to any content you paste or
+            upload.
           </p>
         </details>
         <details>
           <summary>Can I read the EPUB on Kindle?</summary>
           <p>
-            Yes. Kindle devices and the Kindle app support EPUB files. You can
-            send the EPUB to your Kindle via email (Send to Kindle) or USB.
+            Yes. Since 2022, Kindle devices and the Kindle app natively support
+            EPUB files. You can send the EPUB to your Kindle via email (Send to
+            Kindle), the Send to Kindle app, or USB transfer.
           </p>
         </details>
         <details>
@@ -984,7 +1225,7 @@ Start writing..."
           <p>
             The converter supports GitHub Flavored Markdown (GFM) including
             headings, bold, italic, links, images, code blocks, tables,
-            blockquotes, and lists.
+            blockquotes, lists, task lists, strikethrough, and autolinks.
           </p>
         </details>
         <details>
@@ -992,7 +1233,34 @@ Start writing..."
           <p>
             Yes. The converter works on any device with a modern browser —
             including phones and tablets running iOS, Android, Windows, or
-            macOS.
+            macOS. The interface adapts to smaller screens.
+          </p>
+        </details>
+        <details>
+          <summary>Can I convert multiple Markdown files at once?</summary>
+          <p>
+            Currently the tool converts one file at a time. For multiple files,
+            you can concatenate them into a single Markdown file (with headings
+            separating sections) before conversion. Each top-level heading will
+            become a chapter in the EPUB.
+          </p>
+        </details>
+        <details>
+          <summary>What is EPUB format?</summary>
+          <p>
+            EPUB (Electronic Publication) is the most widely adopted open
+            standard for digital books. It's supported by virtually all
+            e-readers and reading apps except older Kindle models, which now
+            also support it natively since 2022. EPUB files contain reflowable
+            text that adapts to any screen size.
+          </p>
+        </details>
+        <details>
+          <summary>Is the generated EPUB valid?</summary>
+          <p>
+            Yes. The tool generates EPUB 3-compliant files with proper metadata,
+            a navigation document, styled content, and correct MIME types. The
+            output passes EPUB validation tools like EPUBCheck.
           </p>
         </details>
       </div>
