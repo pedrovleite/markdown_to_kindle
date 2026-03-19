@@ -116,6 +116,8 @@
         font-family: "Source Serif 4", serif;
         font-size: 15px;
         line-height: 1.7;
+        overflow-x: hidden;
+        max-width: 100vw;
       }
 
       .shell {
@@ -496,6 +498,111 @@
         background: var(--border);
         border-radius: 10px;
       }
+
+      /* — Mobile Responsive — */
+      @media (max-width: 768px) {
+        header {
+          padding: 1rem 1rem;
+        }
+        .logo {
+          font-size: 1.15rem;
+        }
+        .logo span {
+          font-size: 0.8rem;
+          margin-left: 0.3rem;
+        }
+        nav {
+          padding: 0.4rem 1rem;
+          gap: 0.75rem;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          white-space: nowrap;
+          scrollbar-width: none;
+        }
+        nav::-webkit-scrollbar {
+          display: none;
+        }
+        .ad-banner {
+          padding: 0.4rem 0.5rem;
+          min-height: 50px;
+        }
+        .ad-banner .ad-slot {
+          max-width: 100%;
+        }
+        .content {
+          padding: 2rem 1rem;
+        }
+        .content h1 {
+          font-size: 1.5rem;
+        }
+        .content h2 {
+          font-size: 1.2rem;
+          margin-top: 2rem;
+        }
+        .step {
+          padding: 1.25rem;
+          padding-left: 4rem;
+        }
+        .step-number {
+          left: 1rem;
+          top: 1rem;
+          width: 2rem;
+          height: 2rem;
+          font-size: 0.8rem;
+        }
+        .content pre {
+          font-size: 0.78rem;
+          padding: 0.75rem;
+        }
+        .tip-box {
+          padding: 1rem;
+        }
+        .cta-box {
+          padding: 1rem;
+        }
+        footer {
+          padding: 1rem 1rem 0.6rem;
+        }
+        .footer-top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.4rem;
+        }
+        .footer-links {
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.3rem;
+          font-size: 0.6rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header {
+          padding: 0.75rem 0.75rem;
+        }
+        .logo {
+          font-size: 1rem;
+        }
+        nav {
+          padding: 0.35rem 0.75rem;
+          gap: 0.6rem;
+          font-size: 0.6rem;
+        }
+        .content {
+          padding: 1.5rem 0.75rem;
+        }
+        .content h1 {
+          font-size: 1.25rem;
+        }
+        .step {
+          padding: 1rem;
+          padding-left: 3.5rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -518,9 +625,16 @@
         <div class="ad-slot">
           <ins
             class="adsbygoogle"
-            style="display: inline-block; width: 728px; height: 90px"
+            style="
+              display: inline-block;
+              width: 100%;
+              max-width: 728px;
+              height: auto;
+              min-height: 90px;
+            "
             data-ad-client="ca-pub-4608381042047290"
             data-ad-slot="9952723938"
+            data-full-width-responsive="true"
           ></ins>
           <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
