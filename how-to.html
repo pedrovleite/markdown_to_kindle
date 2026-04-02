@@ -59,7 +59,7 @@
           {
             "@type": "HowToStep",
             "name": "Load your Markdown content",
-            "text": "Either paste your Markdown text into the editor, drag and drop a .md file, or click 'open' to browse for a file."
+            "text": "Either paste your Markdown text into the editor, drag and drop a .md file, click 'open .md' to browse for a file, or use 'open folder' when your Markdown references local images such as ./images/diagram.png."
           },
           {
             "@type": "HowToStep",
@@ -736,17 +736,29 @@ This chapter continues the story...
             </li>
             <li>
               <strong>Drag &amp; Drop:</strong> Drag a <code>.md</code> file
-              from your file explorer and drop it onto the editor area
+              onto the editor area, or drop the Markdown together with its image
+              assets if the document uses relative image paths
             </li>
             <li>
-              <strong>Open file:</strong> Click the "open" button in the editor
-              toolbar and browse for your file
+              <strong>Open file:</strong> Click the "open .md" button in the
+              editor toolbar and browse for your file
+            </li>
+            <li>
+              <strong>Open folder:</strong> Click "open folder" when your
+              Markdown references local images like
+              <code>./images/diagram.png</code>. This lets the converter bundle
+              JPG, JPEG, PNG, GIF, WEBP, and SVG assets into the EPUB
             </li>
           </ul>
           <p>
             As soon as your content is in the editor, the live preview on the
             right will update automatically. This shows you exactly how your
             Markdown will be formatted in the EPUB.
+          </p>
+          <p>
+            Remote image URLs can still render in some browsers, but they are
+            not downloaded into the EPUB package. For reliable offline EPUBs,
+            use local files and load them together with the Markdown.
           </p>
         </div>
 
@@ -755,8 +767,9 @@ This chapter continues the story...
           <p>
             If this is your first time using the converter, click the
             <strong>"sample"</strong> button in the editor toolbar to load a
-            pre-written example. This lets you see the full workflow before
-            using your own content.
+            pre-written example, or <strong>"image sample"</strong> to test a
+            Markdown project with JPG, PNG, and SVG assets. This lets you see
+            the full workflow before using your own content.
           </p>
         </div>
 

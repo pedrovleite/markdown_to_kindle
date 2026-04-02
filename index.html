@@ -557,6 +557,28 @@
         color: #e87e7e;
       }
 
+      .asset-summary {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.67rem;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 280px;
+      }
+
+      .preview-asset-error {
+        margin: 1em 0;
+        padding: 0.75em 0.9em;
+        border: 1px solid #8f4c4c;
+        border-radius: var(--radius);
+        background: rgba(232, 126, 126, 0.08);
+        color: #f0b0b0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        line-height: 1.5;
+      }
+
       /* toast */
       #toast {
         position: fixed;
@@ -849,6 +871,12 @@
           padding: 0.75rem 1rem;
           flex-wrap: wrap;
         }
+        .asset-summary {
+          max-width: 100%;
+          white-space: normal;
+          flex-basis: 100%;
+          order: 3;
+        }
         .btn {
           font-size: 0.7rem;
           padding: 0.5rem 0.9rem;
@@ -962,6 +990,13 @@
               </button>
               <button
                 class="btn btn-ghost"
+                onclick="loadImageSampleProject()"
+                title="Load sample with JPG, PNG, and SVG images"
+              >
+                image sample
+              </button>
+              <button
+                class="btn btn-ghost"
                 onclick="clearEditor()"
                 title="Clear"
               >
@@ -972,12 +1007,27 @@
                 style="cursor: pointer"
                 title="Open .md file"
               >
-                ↑ open
+                open .md
                 <input
                   type="file"
                   accept=".md,.txt,.markdown"
                   style="display: none"
                   onchange="loadFile(event)"
+                />
+              </label>
+              <label
+                class="btn btn-ghost"
+                style="cursor: pointer"
+                title="Open a folder with your Markdown file and images"
+              >
+                open folder
+                <input
+                  type="file"
+                  style="display: none"
+                  multiple
+                  webkitdirectory
+                  directory
+                  onchange="loadProjectFiles(event)"
                 />
               </label>
             </div>
@@ -986,12 +1036,12 @@
           <div class="editor-wrap" id="editorWrap">
             <div class="drop-overlay" id="dropOverlay">
               <span style="font-size: 2rem">📄</span>
-              Drop your .md file here
+              Drop Markdown and image assets here
             </div>
             <textarea
               id="editor"
               placeholder="Write or paste your Markdown here...
-You can also drag and drop a .md file into this area.
+You can also drag and drop a .md file or a whole Markdown project folder.
 
 # Article Title
 
@@ -1030,6 +1080,9 @@ Start writing..."
             >
               ⬇ Generate EPUB
             </button>
+            <div class="asset-summary" id="assetSummary">
+              No local assets loaded
+            </div>
             <div class="status" id="status"></div>
           </div>
         </div>
@@ -1344,6 +1397,17 @@ Start writing..."
           </p>
         </details>
         <details>
+          <summary>How do local images work?</summary>
+          <p>
+            Local images are supported when you load the Markdown together with
+            its assets. Use "open folder" or drop the Markdown file and its
+            image files in one go so relative paths like
+            <code>./images/diagram.png</code> can be resolved. JPG, JPEG, PNG,
+            GIF, WEBP, and SVG are packaged into the EPUB. SVG files are
+            embedded as-is, but rendering still depends on the EPUB reader.
+          </p>
+        </details>
+        <details>
           <summary>What Markdown features are supported?</summary>
           <p>
             The converter supports GitHub Flavored Markdown (GFM) including
@@ -1397,10 +1461,22 @@ Start writing..."
 
       const editor = document.getElementById("editor");
       const preview = document.getElementById("preview");
-      const previewEmpty = document.getElementById("previewEmpty");
       const charCount = document.getElementById("charCount");
       const wordCount = document.getElementById("wordCount");
       const statusEl = document.getElementById("status");
+      const assetSummary = document.getElementById("assetSummary");
+      const SUPPORTED_IMAGE_TYPES = {
+        ".jpg": "image/jpeg",
+        ".jpeg": "image/jpeg",
+        ".png": "image/png",
+        ".gif": "image/gif",
+        ".webp": "image/webp",
+        ".svg": "image/svg+xml",
+      };
+
+      const loadedAssets = new Map();
+      const previewObjectUrls = new Set();
+      let currentMarkdownFile = null;
 
       // ---- Live preview ----
       let debounceTimer;
@@ -1416,12 +1492,15 @@ Start writing..."
         charCount.textContent = chars.toLocaleString("en") + " chars";
         wordCount.textContent = words.toLocaleString("en") + " words";
 
+        clearPreviewObjectUrls();
+
         if (!md) {
           preview.innerHTML =
             '<div class="preview-empty">Preview appears here as you type</div>';
           return;
         }
-        preview.innerHTML = marked.parse(md);
+
+        preview.innerHTML = renderPreviewHtml(marked.parse(md));
       }
 
       // ---- Drag & drop ----
@@ -1433,14 +1512,23 @@ Start writing..."
         dropOverlay.classList.add("active");
       });
       editorWrap.addEventListener("dragleave", (e) => {
-        if (!editorWrap.contains(e.relatedTarget))
+        if (!editorWrap.contains(e.relatedTarget)) {
           dropOverlay.classList.remove("active");
+        }
       });
       editorWrap.addEventListener("drop", (e) => {
         e.preventDefault();
         dropOverlay.classList.remove("active");
-        const file = e.dataTransfer.files[0];
-        if (file) readFile(file);
+
+        const files = Array.from(e.dataTransfer.files || []);
+        if (!files.length) return;
+
+        if (files.length === 1) {
+          readFile(files[0]);
+          return;
+        }
+
+        loadProjectFiles({ target: { files } });
       });
 
       function loadFile(event) {
@@ -1449,13 +1537,64 @@ Start writing..."
         event.target.value = "";
       }
 
-      function readFile(file) {
+      function loadProjectFiles(event) {
+        const files = Array.from(event.target.files || []);
+        if (!files.length) return;
+
+        const markdownFiles = files.filter((file) => isMarkdownFile(file.name));
+        if (!markdownFiles.length) {
+          toast(
+            'No Markdown file found. Use "open folder" on a folder that contains a .md file.',
+            "error",
+          );
+          resetInputValue(event.target);
+          return;
+        }
+
+        const markdownFile = choosePrimaryMarkdownFile(markdownFiles);
+        const assetFiles = files.filter((file) => file !== markdownFile);
+        readFile(markdownFile, {
+          markdownPath: getFilePath(markdownFile),
+          assetFiles,
+        });
+
+        if (markdownFiles.length > 1) {
+          toast(
+            `${markdownFile.name} loaded. Additional Markdown files were ignored.`,
+            "success",
+          );
+        }
+
+        resetInputValue(event.target);
+      }
+
+      function readFile(file, options = {}) {
+        if (!isMarkdownFile(file.name)) {
+          toast(
+            "Please choose a Markdown file (.md, .markdown, .txt)",
+            "error",
+          );
+          return;
+        }
+
+        clearAssetState();
+        currentMarkdownFile = {
+          name: file.name,
+          path: options.markdownPath || getFilePath(file),
+        };
+        registerAssetFiles(options.assetFiles || []);
+
         const reader = new FileReader();
         reader.onload = (e) => {
           editor.value = e.target.result;
           updatePreview();
-          toast(`📄 ${file.name} loaded`, "success");
-          // Auto-fill title from filename
+
+          const imageCount = getLoadedImageAssetCount();
+          const message = imageCount
+            ? `📄 ${file.name} loaded with ${imageCount} image asset${imageCount === 1 ? "" : "s"}`
+            : `📄 ${file.name} loaded`;
+          toast(message, "success");
+
           const nameNoExt = file.name.replace(/\.(md|txt|markdown)$/i, "");
           if (!document.getElementById("metaTitle").value) {
             document.getElementById("metaTitle").placeholder = nameNoExt;
@@ -1466,16 +1605,19 @@ Start writing..."
 
       // ---- Helpers ----
       function extractH1(md) {
-        const m = md.match(/^#\s+(.+)$/m);
-        return m ? m[1].trim() : null;
+        const match = md.match(/^#\s+(.+)$/m);
+        return match ? match[1].trim() : null;
       }
 
       function clearEditor() {
+        clearAssetState();
         editor.value = "";
         updatePreview();
       }
 
       function loadSample() {
+        clearAssetState();
+        currentMarkdownFile = { name: "sample.md", path: "sample.md" };
         editor.value = `# The Art of Slow Reading
 
 *By an avid reader*
@@ -1520,6 +1662,69 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
         toast("Sample loaded ✓", "success");
       }
 
+      async function loadImageSampleProject() {
+        try {
+          clearAssetState();
+
+          const markdown = `# EPUB Image Support Demo
+
+This sample validates local image packaging for EPUB output.
+
+## JPEG photo
+
+![Sample JPEG](./images/sample-photo.jpg)
+
+## PNG chart
+
+![Sample PNG](./images/sample-chart.png)
+
+## SVG diagram
+
+![Sample SVG](./images/sample-diagram.svg)
+
+If all three blocks render in the preview and in the generated EPUB, local image support is working as expected.
+`;
+
+          const [jpgFile, pngFile, svgFile] = await Promise.all([
+            createDemoImageFile({
+              format: "image/jpeg",
+              filename: "sample-photo.jpg",
+              relativePath: "image-sample/images/sample-photo.jpg",
+              title: "JPEG",
+              subtitle: "Embedded raster image",
+              accent: "#d4a24c",
+              quality: 0.9,
+            }),
+            createDemoImageFile({
+              format: "image/png",
+              filename: "sample-chart.png",
+              relativePath: "image-sample/images/sample-chart.png",
+              title: "PNG",
+              subtitle: "Chart preview asset",
+              accent: "#4c9fd4",
+            }),
+            createDemoSvgFile(),
+          ]);
+
+          const markdownFile = new File([markdown], "sample-images.md", {
+            type: "text/markdown;charset=utf-8",
+          });
+
+          readFile(markdownFile, {
+            markdownPath: "image-sample/sample-images.md",
+            assetFiles: [jpgFile, pngFile, svgFile],
+          });
+
+          document.getElementById("metaTitle").value =
+            "EPUB Image Support Demo";
+          document.getElementById("metaAuthor").value = "mdtoepub.com";
+          toast("Image sample loaded ✓", "success");
+        } catch (err) {
+          console.error(err);
+          toast("Error creating image sample: " + err.message, "error");
+        }
+      }
+
       // ---- EPUB Generator ----
       async function generateEpub() {
         const md = editor.value.trim();
@@ -1539,17 +1744,16 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
           const author =
             document.getElementById("metaAuthor").value.trim() || "Unknown";
           const lang = document.getElementById("metaLang").value;
-          const htmlBody = marked.parse(md);
+          const parsedHtml = marked.parse(md);
+          const { htmlBody, packagedAssets } = prepareEpubContent(parsedHtml);
           const filename = slugify(title) + ".epub";
 
           const zip = new JSZip();
 
-          // mimetype (must be first, uncompressed)
           zip.file("mimetype", "application/epub+zip", {
             compression: "STORE",
           });
 
-          // META-INF/container.xml
           zip.folder("META-INF").file(
             "container.xml",
             `<?xml version="1.0" encoding="UTF-8"?>
@@ -1561,8 +1765,13 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
           );
 
           const epub = zip.folder("EPUB");
+          const imageManifestItems = packagedAssets
+            .map(
+              (asset) =>
+                `    <item id="${asset.id}" href="${asset.href}" media-type="${asset.mediaType}"/>`,
+            )
+            .join("\n");
 
-          // content.opf
           const uid = "urn:uuid:" + uuidv4();
           epub.file(
             "content.opf",
@@ -1580,7 +1789,7 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
     <item id="nav" href="nav.xhtml" media-type="application/xhtml+xml" properties="nav"/>
     <item id="content" href="content.xhtml" media-type="application/xhtml+xml"/>
     <item id="css" href="style.css" media-type="text/css"/>
-  </manifest>
+${imageManifestItems ? imageManifestItems + "\n" : ""}  </manifest>
   <spine>
     <itemref idref="nav" linear="no"/>
     <itemref idref="content"/>
@@ -1588,7 +1797,6 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
 </package>`,
           );
 
-          // nav.xhtml
           epub.file(
             "nav.xhtml",
             `<?xml version="1.0" encoding="UTF-8"?>
@@ -1604,7 +1812,6 @@ The Kindle helps precisely here: a dedicated device, free from the chaos of a ta
 </html>`,
           );
 
-          // style.css — optimised for e-readers / Kindle
           epub.file(
             "style.css",
             `
@@ -1661,7 +1868,6 @@ em { font-style: italic; }
 `,
           );
 
-          // content.xhtml
           epub.file(
             "content.xhtml",
             `<?xml version="1.0" encoding="UTF-8"?>
@@ -1678,7 +1884,10 @@ ${htmlBody}
 </html>`,
           );
 
-          // Generate ZIP as blob
+          packagedAssets.forEach((asset) => {
+            epub.file(asset.href, asset.file);
+          });
+
           const blob = await zip.generateAsync({
             type: "blob",
             mimeType: "application/epub+zip",
@@ -1686,12 +1895,11 @@ ${htmlBody}
             compressionOptions: { level: 9 },
           });
 
-          // Download
           const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = filename;
-          a.click();
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = filename;
+          link.click();
           setTimeout(() => URL.revokeObjectURL(url), 5000);
 
           setStatus("ok", `${filename} (${formatBytes(blob.size)})`);
@@ -1704,6 +1912,229 @@ ${htmlBody}
           btn.disabled = false;
           btn.textContent = "⬇ Generate EPUB";
         }
+      }
+
+      // ---- Rendering / asset helpers ----
+      function renderPreviewHtml(htmlBody) {
+        const doc = new DOMParser().parseFromString(
+          `<body>${htmlBody}</body>`,
+          "text/html",
+        );
+
+        doc.body.querySelectorAll("img[src]").forEach((img) => {
+          const originalSrc = (img.getAttribute("src") || "").trim();
+          if (!isLocalAssetReference(originalSrc)) return;
+
+          const asset = resolveLocalAsset(originalSrc);
+          if (!asset) {
+            const error = doc.createElement("div");
+            error.className = "preview-asset-error";
+            error.textContent = `Missing local image: ${originalSrc}. Load the Markdown together with its images or use open folder.`;
+            img.replaceWith(error);
+            return;
+          }
+
+          const objectUrl = URL.createObjectURL(asset.file);
+          previewObjectUrls.add(objectUrl);
+          img.setAttribute("src", objectUrl);
+          img.setAttribute("title", asset.relativePath);
+        });
+
+        return doc.body.innerHTML;
+      }
+
+      function prepareEpubContent(htmlBody) {
+        const doc = new DOMParser().parseFromString(
+          `<body>${htmlBody}</body>`,
+          "text/html",
+        );
+        const missingAssets = new Set();
+        const unsupportedAssets = new Set();
+        const packagedAssets = [];
+        const packagedByPath = new Map();
+        const usedNames = new Set();
+
+        doc.body.querySelectorAll("img[src]").forEach((img) => {
+          const originalSrc = (img.getAttribute("src") || "").trim();
+          if (!isLocalAssetReference(originalSrc)) return;
+
+          const asset = resolveLocalAsset(originalSrc);
+          if (!asset) {
+            missingAssets.add(originalSrc);
+            return;
+          }
+
+          const mediaType = getSupportedImageMediaType(
+            asset.file,
+            asset.relativePath,
+          );
+          if (!mediaType) {
+            unsupportedAssets.add(`${originalSrc} (${asset.file.name})`);
+            return;
+          }
+
+          let packaged = packagedByPath.get(asset.relativePath);
+          if (!packaged) {
+            packaged = {
+              id: `img-${packagedByPath.size + 1}`,
+              href: buildEpubImagePath(asset, mediaType, usedNames),
+              mediaType,
+              file: asset.file,
+            };
+            packagedByPath.set(asset.relativePath, packaged);
+            packagedAssets.push(packaged);
+          }
+
+          img.setAttribute("src", packaged.href);
+        });
+
+        if (missingAssets.size || unsupportedAssets.size) {
+          throw new Error(
+            buildAssetErrorMessage(
+              Array.from(missingAssets),
+              Array.from(unsupportedAssets),
+            ),
+          );
+        }
+
+        return { htmlBody: doc.body.innerHTML, packagedAssets };
+      }
+
+      function buildAssetErrorMessage(missingAssets, unsupportedAssets) {
+        const messages = [];
+
+        if (missingAssets.length) {
+          messages.push(
+            `Missing image assets: ${summarizeItems(missingAssets)}. Load the Markdown together with its images using open folder or by dropping all files at once.`,
+          );
+        }
+
+        if (unsupportedAssets.length) {
+          messages.push(
+            `Unsupported image formats: ${summarizeItems(unsupportedAssets)}. Supported EPUB image formats are JPG, JPEG, PNG, GIF, WEBP, and SVG. SVG files are embedded as-is, but support still depends on the EPUB reader.`,
+          );
+        }
+
+        return messages.join(" ");
+      }
+
+      function summarizeItems(items) {
+        const uniqueItems = Array.from(new Set(items));
+        if (uniqueItems.length <= 3) return uniqueItems.join(", ");
+        return `${uniqueItems.slice(0, 3).join(", ")} (+${uniqueItems.length - 3} more)`;
+      }
+
+      function clearAssetState() {
+        clearPreviewObjectUrls();
+        loadedAssets.clear();
+        currentMarkdownFile = null;
+        updateAssetSummary();
+      }
+
+      function clearPreviewObjectUrls() {
+        previewObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+        previewObjectUrls.clear();
+      }
+
+      function registerAssetFiles(files) {
+        files.forEach((file) => {
+          if (isMarkdownFile(file.name)) return;
+
+          const relativePath = getFilePath(file);
+          if (!relativePath) return;
+
+          loadedAssets.set(relativePath, {
+            file,
+            relativePath,
+          });
+        });
+
+        updateAssetSummary();
+      }
+
+      function updateAssetSummary() {
+        const imageCount = getLoadedImageAssetCount();
+        if (!imageCount) {
+          assetSummary.textContent = "No local assets loaded";
+          return;
+        }
+
+        assetSummary.textContent = `${imageCount} local image asset${imageCount === 1 ? "" : "s"} ready`;
+      }
+
+      function getLoadedImageAssetCount() {
+        return Array.from(loadedAssets.values()).filter((asset) =>
+          isImageFile(asset.file),
+        ).length;
+      }
+
+      function choosePrimaryMarkdownFile(files) {
+        return [...files].sort((left, right) => {
+          const leftPath = getFilePath(left);
+          const rightPath = getFilePath(right);
+          return (
+            leftPath.length - rightPath.length ||
+            leftPath.localeCompare(rightPath)
+          );
+        })[0];
+      }
+
+      function resolveLocalAsset(src) {
+        const cleanedSrc = decodeAssetPath(stripQueryAndHash(src));
+        const normalizedSrc = normalizePath(cleanedSrc.replace(/^\//, ""));
+        const baseDir = currentMarkdownFile
+          ? dirname(currentMarkdownFile.path)
+          : "";
+        const candidatePaths = [];
+
+        if (baseDir) {
+          candidatePaths.push(normalizePath(`${baseDir}/${cleanedSrc}`));
+        }
+        candidatePaths.push(normalizedSrc);
+
+        for (const candidatePath of candidatePaths) {
+          if (loadedAssets.has(candidatePath)) {
+            return loadedAssets.get(candidatePath);
+          }
+        }
+
+        const basename = normalizedSrc.split("/").pop();
+        if (!basename) return null;
+
+        const basenameMatches = Array.from(loadedAssets.values()).filter(
+          (asset) =>
+            asset.relativePath === basename ||
+            asset.relativePath.endsWith(`/${basename}`),
+        );
+
+        return basenameMatches.length === 1 ? basenameMatches[0] : null;
+      }
+
+      function buildEpubImagePath(asset, mediaType, usedNames) {
+        const sourceName = stripExtension(asset.file.name) || "image";
+        const baseName = slugify(sourceName) || "image";
+        const extension = getPreferredImageExtension(
+          asset.relativePath,
+          mediaType,
+        );
+        let candidate = `images/${baseName}.${extension}`;
+        let counter = 2;
+
+        while (usedNames.has(candidate)) {
+          candidate = `images/${baseName}-${counter}.${extension}`;
+          counter += 1;
+        }
+
+        usedNames.add(candidate);
+        return candidate;
+      }
+
+      function getPreferredImageExtension(path, mediaType) {
+        const extension = getFileExtension(path).slice(1);
+        if (extension) return extension === "jpeg" ? "jpg" : extension;
+        if (mediaType === "image/jpeg") return "jpg";
+        if (mediaType === "image/svg+xml") return "svg";
+        return mediaType.split("/")[1];
       }
 
       // ---- Utilities ----
@@ -1752,6 +2183,212 @@ ${htmlBody}
         });
       }
 
+      function isMarkdownFile(name) {
+        return /\.(md|markdown|txt)$/i.test(name || "");
+      }
+
+      function isImageFile(file) {
+        return Boolean(getSupportedImageMediaType(file, file.name));
+      }
+
+      function getSupportedImageMediaType(file, path) {
+        const extension = getFileExtension(path || file.name);
+        if (SUPPORTED_IMAGE_TYPES[extension]) {
+          return SUPPORTED_IMAGE_TYPES[extension];
+        }
+
+        if (!file || !file.type) return "";
+        return Object.values(SUPPORTED_IMAGE_TYPES).includes(file.type)
+          ? file.type
+          : "";
+      }
+
+      function getFileExtension(path) {
+        const match = /\.([a-z0-9]+)$/i.exec(path || "");
+        return match ? `.${match[1].toLowerCase()}` : "";
+      }
+
+      function getFilePath(file) {
+        return normalizePath(
+          (file &&
+            (file._relativePath || file.webkitRelativePath || file.name)) ||
+            "",
+        );
+      }
+
+      async function createDemoImageFile(options) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 1200;
+        canvas.height = 720;
+
+        const context = canvas.getContext("2d");
+        if (!context) {
+          throw new Error("Canvas rendering is not available in this browser.");
+        }
+
+        context.fillStyle = "#f7f1e3";
+        context.fillRect(0, 0, canvas.width, canvas.height);
+
+        const gradient = context.createLinearGradient(
+          0,
+          0,
+          canvas.width,
+          canvas.height,
+        );
+        gradient.addColorStop(0, options.accent);
+        gradient.addColorStop(1, "#111827");
+        context.fillStyle = gradient;
+        context.fillRect(0, 0, canvas.width, 220);
+
+        context.fillStyle = "rgba(255,255,255,0.12)";
+        for (let index = 0; index < 6; index += 1) {
+          context.fillRect(
+            120 + index * 140,
+            340 - index * 18,
+            84,
+            220 + index * 18,
+          );
+        }
+
+        context.strokeStyle = options.accent;
+        context.lineWidth = 8;
+        context.beginPath();
+        context.moveTo(110, 560);
+        context.bezierCurveTo(260, 430, 420, 610, 570, 470);
+        context.bezierCurveTo(690, 360, 860, 400, 1080, 250);
+        context.stroke();
+
+        context.fillStyle = "#111827";
+        context.font = "bold 68px Georgia";
+        context.fillText(options.title, 86, 330);
+
+        context.fillStyle = "#374151";
+        context.font = "32px Arial";
+        context.fillText(options.subtitle, 86, 390);
+
+        context.fillStyle = options.accent;
+        context.font = "bold 26px Arial";
+        context.fillText("mdtoepub.com sample project", 86, 625);
+
+        const blob = await canvasToBlob(
+          canvas,
+          options.format,
+          options.quality,
+        );
+        return attachRelativePath(
+          new File([blob], options.filename, { type: options.format }),
+          options.relativePath,
+        );
+      }
+
+      function createDemoSvgFile() {
+        const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">SVG diagram sample</title>
+  <desc id="desc">Simple SVG diagram used to validate EPUB packaging.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#bg)" rx="24"/>
+  <g fill="none" stroke="#f8fafc" stroke-width="8" stroke-linecap="round">
+    <path d="M160 520 C300 320, 450 320, 590 520"/>
+    <path d="M610 520 C730 360, 850 360, 980 520"/>
+    <path d="M375 290 L600 180 L825 290" stroke="#fbbf24"/>
+  </g>
+  <g fill="#f8fafc" font-family="Georgia, serif">
+    <text x="88" y="120" font-size="72" font-weight="700">SVG</text>
+    <text x="88" y="172" font-size="30">Vector diagram sample for EPUB support</text>
+  </g>
+  <g fill="#fbbf24">
+    <circle cx="375" cy="290" r="24"/>
+    <circle cx="600" cy="180" r="24"/>
+    <circle cx="825" cy="290" r="24"/>
+  </g>
+</svg>`;
+
+        return attachRelativePath(
+          new File([svg], "sample-diagram.svg", {
+            type: "image/svg+xml",
+          }),
+          "image-sample/images/sample-diagram.svg",
+        );
+      }
+
+      function canvasToBlob(canvas, type, quality) {
+        return new Promise((resolve, reject) => {
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                resolve(blob);
+                return;
+              }
+
+              reject(new Error(`Could not create ${type} sample image.`));
+            },
+            type,
+            quality,
+          );
+        });
+      }
+
+      function attachRelativePath(file, relativePath) {
+        file._relativePath = normalizePath(relativePath);
+        return file;
+      }
+
+      function dirname(path) {
+        const normalizedPath = normalizePath(path);
+        const lastSlash = normalizedPath.lastIndexOf("/");
+        return lastSlash === -1 ? "" : normalizedPath.slice(0, lastSlash);
+      }
+
+      function normalizePath(path) {
+        const rawPath = String(path || "").replace(/\\/g, "/");
+        const parts = [];
+
+        rawPath.split("/").forEach((part) => {
+          if (!part || part === ".") return;
+          if (part === "..") {
+            if (parts.length) parts.pop();
+            return;
+          }
+          parts.push(part);
+        });
+
+        return parts.join("/");
+      }
+
+      function stripQueryAndHash(value) {
+        return String(value || "")
+          .split("#")[0]
+          .split("?")[0];
+      }
+
+      function decodeAssetPath(value) {
+        try {
+          return decodeURIComponent(value);
+        } catch {
+          return value;
+        }
+      }
+
+      function stripExtension(name) {
+        return String(name || "").replace(/\.[^.]+$/, "");
+      }
+
+      function isLocalAssetReference(src) {
+        return !!src && !/^(?:[a-z][a-z0-9+.-]*:|\/\/|#)/i.test(src);
+      }
+
+      function resetInputValue(input) {
+        if (input && typeof input.value === "string") {
+          input.value = "";
+        }
+      }
+
       // ---- Ad management ----
       function closeAd() {
         const banner = document.getElementById("adBanner");
@@ -1759,6 +2396,7 @@ ${htmlBody}
       }
 
       // Init
+      updateAssetSummary();
       updatePreview();
     </script>
   </body>
