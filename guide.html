@@ -853,10 +853,13 @@ This is the second paragraph, separated by a blank line.</code></pre>
 ![Alt text for image](image-url.jpg)
 ![Alt text](image.png "Image title")</code></pre>
         <p>
-          <strong>Note for EPUB:</strong> External images (URLs) won't be
-          embedded in the EPUB file. For images to appear in the ebook, they
-          need to be base64-encoded data URIs or you'll need a more advanced
-          conversion tool that bundles image assets.
+          <strong>Note for EPUB:</strong> The converter now supports local image
+          assets referenced with relative paths such as
+          <code>./images/diagram.png</code>. To embed them in the EPUB, load the
+          Markdown together with its asset files using
+          <strong>open folder</strong>
+          or by dragging the Markdown and images into the page together. Remote
+          image URLs are not downloaded into the EPUB package.
         </p>
 
         <h3>Lists</h3>
@@ -1282,10 +1285,12 @@ Nothing could have prepared them for what came next...</code></pre>
 
         <h3>Images don't appear</h3>
         <p>
-          If your Markdown references external image URLs, they won't be
-          embedded in the EPUB. For images to work in offline ebooks, they need
-          to be included as data URIs (base64-encoded) in the Markdown or
-          handled by a more advanced build tool that bundles assets.
+          If your Markdown references local files like
+          <code>./images/chart.png</code>, make sure you loaded the Markdown
+          together with those image files using <strong>open folder</strong> or
+          drag and drop. The converter can embed JPG, JPEG, PNG, GIF, WEBP, and
+          SVG assets into the EPUB. Remote image URLs are still not downloaded,
+          so they may not appear in offline readers.
         </p>
 
         <h3>Special characters are broken</h3>
