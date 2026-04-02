@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta name="admaven-placement" content="Bqjs9rTsH" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
@@ -188,7 +187,7 @@
       .shell {
         min-height: 100vh;
         display: grid;
-        grid-template-rows: auto 1fr auto;
+        grid-template-rows: auto auto auto 1fr auto;
         max-width: 100%;
         overflow-x: hidden;
       }
@@ -712,6 +711,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
       }
 
       .ad-banner .ad-label {
@@ -724,34 +726,6 @@
         letter-spacing: 0.1em;
         color: var(--muted);
         opacity: 0.5;
-      }
-
-      .ad-banner .ad-placeholder {
-        border: 1px dashed var(--border);
-        border-radius: var(--radius);
-        padding: 0.6rem 2rem;
-        color: var(--muted);
-        font-family: "JetBrains Mono", monospace;
-        font-size: 0.65rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        opacity: 0.5;
-      }
-
-      .ad-close {
-        position: absolute;
-        top: 4px;
-        left: 12px;
-        background: none;
-        border: none;
-        color: var(--muted);
-        font-size: 0.7rem;
-        cursor: pointer;
-        opacity: 0.5;
-        font-family: "JetBrains Mono", monospace;
-      }
-      .ad-close:hover {
-        opacity: 1;
       }
 
       /* — SEO content section — */
@@ -973,6 +947,22 @@
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
       </nav>
+
+      <div class="ad-banner" aria-label="Advertisement">
+        <div class="ad-label">Advertisement</div>
+        <div class="ad-slot">
+          <script>
+            atOptions = {
+              key: "7ef3b5af9ac44168f61a1fc39bc56bf9",
+              format: "iframe",
+              height: 60,
+              width: 468,
+              params: {},
+            };
+          </script>
+          <script src="https://www.highperformanceformat.com/7ef3b5af9ac44168f61a1fc39bc56bf9/invoke.js"></script>
+        </div>
+      </div>
 
       <main>
         <!-- LEFT: Editor -->
@@ -2387,12 +2377,6 @@ ${htmlBody}
         if (input && typeof input.value === "string") {
           input.value = "";
         }
-      }
-
-      // ---- Ad management ----
-      function closeAd() {
-        const banner = document.getElementById("adBanner");
-        banner.style.display = "none";
       }
 
       // Init
