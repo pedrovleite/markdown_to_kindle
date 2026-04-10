@@ -169,10 +169,11 @@
       }
 
       html {
+        height: 100%;
         overflow-x: hidden;
       }
       body {
-        height: 100%;
+        min-height: 100%;
         background: var(--bg);
         color: var(--text);
         font-family: "Source Serif 4", serif;
@@ -186,10 +187,12 @@
       /* — Layout — */
       .shell {
         min-height: 100vh;
+        height: 100dvh;
         display: grid;
-        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
         max-width: 100%;
         overflow-x: hidden;
+        overflow: hidden;
       }
 
       header {
@@ -230,6 +233,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 0;
+        min-height: 0;
         max-width: 100%;
         overflow: hidden;
       }
@@ -240,6 +244,7 @@
         flex-direction: column;
         min-height: 0;
         min-width: 0;
+        overflow: hidden;
       }
       .panel + .panel {
         border-left: 1px solid var(--border);
@@ -282,18 +287,22 @@
         flex: 1;
         display: flex;
         flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
       }
 
       #editor {
         flex: 1;
+        min-height: 0;
+        height: 100%;
         width: 100%;
-        min-height: 400px;
         max-width: 100%;
         background: var(--bg);
         color: var(--text);
         border: none;
         outline: none;
         resize: none;
+        overflow-y: auto;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.82rem;
         line-height: 1.75;
@@ -328,6 +337,7 @@
       /* — Preview — */
       #preview {
         flex: 1;
+        min-height: 0;
         overflow-y: auto;
         padding: 1.5rem 1.75rem;
         background: var(--bg);
@@ -496,6 +506,9 @@
         display: flex;
         align-items: center;
         gap: 0.75rem;
+        position: sticky;
+        bottom: 0;
+        z-index: 3;
       }
 
       .btn {
@@ -792,6 +805,11 @@
 
       /* — Mobile Responsive — */
       @media (max-width: 768px) {
+        .shell {
+          height: auto;
+          min-height: 100vh;
+          overflow: visible;
+        }
         header {
           padding: 1rem 1rem;
         }
@@ -820,21 +838,28 @@
         }
         main {
           grid-template-columns: 1fr;
+          grid-auto-rows: minmax(0, auto);
         }
         .panel + .panel {
           border-left: none;
           border-top: 1px solid var(--border);
         }
+        .panel {
+          max-height: none;
+        }
+        .editor-panel {
+          min-height: 58vh;
+        }
+        .preview-panel {
+          min-height: 38vh;
+          max-height: 50vh;
+        }
         #editor {
-          min-height: 250px;
           font-size: 0.78rem;
           padding: 1rem;
         }
         #preview {
           padding: 1rem;
-          min-height: 200px;
-          max-height: 50vh;
-          overflow-y: auto;
         }
         .sidebar {
           grid-template-columns: 1fr;
@@ -966,7 +991,7 @@
 
       <main>
         <!-- LEFT: Editor -->
-        <div class="panel">
+        <div class="panel editor-panel">
           <div class="panel-header">
             <div class="dot"></div>
             <span class="panel-label">Markdown</span>
@@ -1078,7 +1103,7 @@ Start writing..."
         </div>
 
         <!-- RIGHT: Preview -->
-        <div class="panel">
+        <div class="panel preview-panel">
           <div class="panel-header">
             <div class="dot blue"></div>
             <span class="panel-label">Preview</span>
@@ -1455,6 +1480,17 @@ Start writing..."
       const wordCount = document.getElementById("wordCount");
       const statusEl = document.getElementById("status");
       const assetSummary = document.getElementById("assetSummary");
+      const PREVIEW_SYNC_SELECTOR =
+        ":scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6, :scope > p, :scope > pre, :scope > blockquote, :scope > ul, :scope > ol, :scope > table, :scope > hr";
+      const PREVIEW_SYNC_TOKEN_TYPES = new Set([
+        "heading",
+        "paragraph",
+        "code",
+        "blockquote",
+        "list",
+        "table",
+        "hr",
+      ]);
       const SUPPORTED_IMAGE_TYPES = {
         ".jpg": "image/jpeg",
         ".jpeg": "image/jpeg",
@@ -1467,6 +1503,10 @@ Start writing..."
       const loadedAssets = new Map();
       const previewObjectUrls = new Set();
       let currentMarkdownFile = null;
+      let previewSyncPoints = [];
+      let previewSyncFrame = 0;
+      let previewSyncLocked = false;
+      let previewSyncRefreshFrame = 0;
 
       // ---- Live preview ----
       let debounceTimer;
@@ -1474,11 +1514,15 @@ Start writing..."
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(updatePreview, 120);
       });
+      editor.addEventListener("scroll", syncPreviewToEditor);
+      preview.addEventListener("load", refreshPreviewSyncState, true);
+      window.addEventListener("resize", refreshPreviewSyncState);
 
       function updatePreview() {
         const md = editor.value.trim();
         const chars = editor.value.length;
         const words = md ? md.split(/\s+/).filter(Boolean).length : 0;
+        const scrollRatio = getScrollRatio(editor);
         charCount.textContent = chars.toLocaleString("en") + " chars";
         wordCount.textContent = words.toLocaleString("en") + " words";
 
@@ -1487,10 +1531,143 @@ Start writing..."
         if (!md) {
           preview.innerHTML =
             '<div class="preview-empty">Preview appears here as you type</div>';
+          previewSyncPoints = [];
+          preview.scrollTop = 0;
           return;
         }
 
         preview.innerHTML = renderPreviewHtml(marked.parse(md));
+        rebuildPreviewSyncPoints(editor.value);
+        syncPreviewToRatio(scrollRatio);
+      }
+
+      function getScrollRatio(element) {
+        const maxScrollTop = element.scrollHeight - element.clientHeight;
+        if (maxScrollTop <= 0) return 0;
+        return element.scrollTop / maxScrollTop;
+      }
+
+      function syncPreviewToRatio(ratio) {
+        const boundedRatio = Math.max(0, Math.min(1, ratio || 0));
+        const maxScrollTop = preview.scrollHeight - preview.clientHeight;
+
+        if (maxScrollTop <= 0) {
+          preview.scrollTop = 0;
+          return;
+        }
+
+        let targetScrollTop = boundedRatio * maxScrollTop;
+
+        if (previewSyncPoints.length >= 2) {
+          const upperIndex = previewSyncPoints.findIndex(
+            (point) => point.sourceRatio >= boundedRatio,
+          );
+
+          if (upperIndex === -1) {
+            targetScrollTop =
+              previewSyncPoints[previewSyncPoints.length - 1].previewOffset;
+          } else if (upperIndex === 0) {
+            targetScrollTop = previewSyncPoints[0].previewOffset;
+          } else {
+            const previousPoint = previewSyncPoints[upperIndex - 1];
+            const nextPoint = previewSyncPoints[upperIndex];
+            const sourceSpan =
+              nextPoint.sourceRatio - previousPoint.sourceRatio;
+            const localRatio =
+              sourceSpan <= 0
+                ? 0
+                : (boundedRatio - previousPoint.sourceRatio) / sourceSpan;
+
+            targetScrollTop =
+              previousPoint.previewOffset +
+              (nextPoint.previewOffset - previousPoint.previewOffset) *
+                localRatio;
+          }
+        }
+
+        previewSyncLocked = true;
+        preview.scrollTop = Math.max(
+          0,
+          Math.min(maxScrollTop, targetScrollTop),
+        );
+        previewSyncLocked = false;
+      }
+
+      function syncPreviewToEditor() {
+        if (previewSyncLocked) return;
+
+        cancelAnimationFrame(previewSyncFrame);
+        previewSyncFrame = requestAnimationFrame(() => {
+          syncPreviewToRatio(getScrollRatio(editor));
+        });
+      }
+
+      function refreshPreviewSyncState() {
+        cancelAnimationFrame(previewSyncRefreshFrame);
+        previewSyncRefreshFrame = requestAnimationFrame(() => {
+          if (!editor.value.trim()) return;
+          rebuildPreviewSyncPoints(editor.value);
+          syncPreviewToEditor();
+        });
+      }
+
+      function rebuildPreviewSyncPoints(markdown) {
+        const maxScrollTop = Math.max(
+          0,
+          preview.scrollHeight - preview.clientHeight,
+        );
+        const previewBlocks = Array.from(
+          preview.querySelectorAll(PREVIEW_SYNC_SELECTOR),
+        );
+        const markdownBlocks = collectMarkdownSyncBlocks(markdown);
+        const pairCount = Math.min(previewBlocks.length, markdownBlocks.length);
+
+        previewSyncPoints = [{ sourceRatio: 0, previewOffset: 0 }];
+
+        for (let index = 0; index < pairCount; index += 1) {
+          previewSyncPoints.push({
+            sourceRatio: markdownBlocks[index].sourceRatio,
+            previewOffset: Math.min(
+              maxScrollTop,
+              previewBlocks[index].offsetTop,
+            ),
+          });
+        }
+
+        previewSyncPoints.push({ sourceRatio: 1, previewOffset: maxScrollTop });
+      }
+
+      function collectMarkdownSyncBlocks(markdown) {
+        const normalizedMarkdown = String(markdown || "");
+        const totalLength = Math.max(normalizedMarkdown.length, 1);
+        const tokens = marked.lexer(normalizedMarkdown);
+        const blocks = [];
+        let cursor = 0;
+
+        tokens.forEach((token) => {
+          if (
+            !PREVIEW_SYNC_TOKEN_TYPES.has(token.type) ||
+            typeof token.raw !== "string" ||
+            !token.raw.trim()
+          ) {
+            return;
+          }
+
+          let sourceIndex = normalizedMarkdown.indexOf(token.raw, cursor);
+          if (sourceIndex === -1) {
+            sourceIndex = normalizedMarkdown.indexOf(token.raw);
+          }
+          if (sourceIndex === -1) {
+            sourceIndex = cursor;
+          }
+
+          cursor = Math.max(cursor, sourceIndex + token.raw.length);
+          blocks.push({
+            sourceRatio: Math.max(0, Math.min(1, sourceIndex / totalLength)),
+          });
+        });
+
+        return blocks;
       }
 
       // ---- Drag & drop ----
