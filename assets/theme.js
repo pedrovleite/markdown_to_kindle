@@ -1,8 +1,10 @@
 (function () {
   const STORAGE_KEY = "mdtoepub-theme";
   const VALID_THEMES = new Set(["system", "light", "dark"]);
+  const MOBILE_NAV_MEDIA = "(max-width: 768px)";
   const root = document.documentElement;
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  const mobileNavQuery = window.matchMedia(MOBILE_NAV_MEDIA);
 
   function getStoredPreference() {
     try {
@@ -99,6 +101,49 @@
     syncToggleState(root.dataset.themePreference || getStoredPreference());
   }
 
+  function setMobileNavState(nav, toggle, isOpen) {
+    nav.classList.toggle("nav-open", isOpen);
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  function buildMobileMenu() {
+    const nav = document.querySelector("nav");
+    if (!nav || nav.querySelector(".nav-menu-toggle")) return;
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "nav-menu-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Toggle navigation menu");
+    toggle.innerHTML =
+      '<span class="nav-menu-toggle-line" aria-hidden="true"></span><span>Menu</span>';
+
+    nav.prepend(toggle);
+
+    toggle.addEventListener("click", () => {
+      const isOpen = !nav.classList.contains("nav-open");
+      setMobileNavState(nav, toggle, isOpen);
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (!mobileNavQuery.matches) return;
+      if (!event.target.closest("a")) return;
+      setMobileNavState(nav, toggle, false);
+    });
+
+    const syncNavState = () => {
+      if (!mobileNavQuery.matches) {
+        setMobileNavState(nav, toggle, false);
+      }
+    };
+
+    if (typeof mobileNavQuery.addEventListener === "function") {
+      mobileNavQuery.addEventListener("change", syncNavState);
+    } else if (typeof mobileNavQuery.addListener === "function") {
+      mobileNavQuery.addListener(syncNavState);
+    }
+  }
+
   function handleSystemThemeChange() {
     if ((root.dataset.themePreference || "system") === "system") {
       applyTheme("system", false);
@@ -107,6 +152,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     buildToggle();
+    buildMobileMenu();
     applyTheme(root.dataset.themePreference || getStoredPreference(), false);
   });
 

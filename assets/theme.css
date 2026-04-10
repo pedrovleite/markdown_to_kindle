@@ -62,12 +62,13 @@ summary:focus-visible,
   outline: none;
   box-shadow: 0 0 0 3px var(--focus-ring);
 }
-
 .theme-controls {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
+  min-width: 0;
+  flex-shrink: 0;
 }
 
 .theme-controls-label {
@@ -78,9 +79,37 @@ summary:focus-visible,
   color: var(--muted);
 }
 
+.nav-menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface2);
+  color: var(--text);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.nav-menu-toggle-line {
+  display: block;
+  width: 0.85rem;
+  height: 1px;
+  background: currentColor;
+  box-shadow: 0 4px 0 currentColor, 0 -4px 0 currentColor;
+}
+
 .theme-toggle {
   display: inline-flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 0.2rem;
   padding: 0.2rem;
   border: 1px solid var(--border);
@@ -114,9 +143,57 @@ summary:focus-visible,
   color: var(--text);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 920px) {
   .theme-controls {
+    gap: 0.35rem;
+  }
+
+  .theme-toggle {
+    padding: 0.15rem;
+  }
+
+  .theme-toggle-option {
+    padding: 0.38rem 0.58rem;
+    font-size: 0.58rem;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    align-items: center;
+    flex-wrap: wrap;
+    overflow: visible;
+    white-space: normal;
+    gap: 0.5rem 0.75rem;
+  }
+
+  .nav-menu-toggle {
+    display: inline-flex;
     margin-left: 0;
+    order: 1;
+  }
+
+  nav > a,
+  nav > .nav-spacer {
+    display: none;
+  }
+
+  nav > .theme-controls {
+    display: inline-flex;
+    margin-left: auto;
+    order: 2;
+    max-width: 100%;
+  }
+
+  nav.nav-open > a {
+    display: block;
+    width: 100%;
+    padding: 0.15rem 0;
+    order: 3;
+  }
+
+  .theme-controls {
+    margin-left: auto;
     flex: 0 0 auto;
   }
 
@@ -125,8 +202,23 @@ summary:focus-visible,
   }
 
   .theme-toggle-option {
-    padding: 0.38rem 0.62rem;
-    font-size: 0.58rem;
+    padding: 0.34rem 0.52rem;
+    font-size: 0.56rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .theme-controls {
+    gap: 0.25rem;
+  }
+
+  .theme-toggle {
+    padding: 0.12rem;
+  }
+
+  .theme-toggle-option {
+    padding: 0.32rem 0.46rem;
+    font-size: 0.52rem;
   }
 }
 

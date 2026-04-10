@@ -221,10 +221,10 @@
         min-height: 100vh;
         height: 100dvh;
         display: grid;
-        grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto auto minmax(0, 1fr) auto auto;
         max-width: 100%;
         overflow-x: hidden;
-        overflow: hidden;
+        overflow-y: auto;
       }
 
       header {
@@ -300,6 +300,31 @@
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: var(--muted);
+        flex: 0 0 auto;
+      }
+
+      .toolbar-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        width: 100%;
+        min-width: 0;
+      }
+
+      .toolbar-controls > .btn {
+        flex: 0 1 auto;
+      }
+
+      .editor-toolbar {
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        padding: 0.9rem 1.25rem;
+      }
+
+      .file-trigger {
+        cursor: pointer;
       }
 
       .dot {
@@ -496,10 +521,20 @@
         align-items: end;
       }
 
+      .options-panel {
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      .options-panel .sidebar {
+        border-top: none;
+      }
+
       .field {
         display: flex;
         flex-direction: column;
         gap: 0.35rem;
+        min-width: 0;
       }
 
       .field label {
@@ -512,6 +547,8 @@
 
       .field input,
       .field select {
+        width: 100%;
+        min-width: 0;
         background: var(--surface2);
         border: 1px solid var(--border);
         border-radius: var(--radius);
@@ -537,10 +574,8 @@
         padding: 0.9rem 1.25rem;
         display: flex;
         align-items: center;
+        flex-wrap: wrap;
         gap: 0.75rem;
-        position: sticky;
-        bottom: 0;
-        z-index: 3;
       }
 
       .btn {
@@ -555,7 +590,9 @@
         transition: all 0.15s;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 0.4rem;
+        max-width: 100%;
       }
 
       .btn-primary {
@@ -593,6 +630,7 @@
         align-items: center;
         gap: 0.4rem;
         transition: all 0.3s;
+        min-width: 0;
       }
       .status.ok {
         color: var(--success);
@@ -605,10 +643,12 @@
         font-family: "JetBrains Mono", monospace;
         font-size: 0.67rem;
         color: var(--muted);
-        white-space: nowrap;
+        white-space: normal;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 280px;
+        max-width: min(100%, 280px);
+        flex: 1 1 14rem;
+        min-width: 12rem;
       }
 
       .preview-asset-error {
@@ -746,6 +786,10 @@
         gap: 0.75rem;
         min-height: 60px;
         position: relative;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
       }
 
       .ad-banner .ad-slot {
@@ -755,10 +799,15 @@
         min-height: 50px;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        min-width: 0;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+      }
+
+      .ad-banner .ad-slot > * {
+        flex: 0 0 auto;
       }
 
       .ad-banner .ad-label {
@@ -836,6 +885,69 @@
       }
 
       /* — Mobile Responsive — */
+      @media (max-width: 920px) {
+        .editor-wrap {
+          flex: 1 0 16rem;
+          min-height: 16rem;
+        }
+
+        .sidebar {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .editor-toolbar {
+          padding: 0.75rem 1rem;
+        }
+
+        .asset-summary {
+          max-width: 100%;
+        }
+
+        .status {
+          margin-left: 0;
+          flex: 1 1 100%;
+          justify-content: flex-start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .panel-header {
+          align-items: flex-start;
+        }
+
+        .editor-toolbar {
+          padding: 0.7rem 0.75rem;
+        }
+
+        .toolbar-controls {
+          gap: 0.45rem;
+        }
+
+        .toolbar-controls > .btn {
+          flex: 1 1 calc(50% - 0.25rem);
+          min-width: 0;
+        }
+
+        .sidebar {
+          grid-template-columns: 1fr;
+        }
+
+        .actions {
+          align-items: stretch;
+        }
+
+        .actions > .btn,
+        .asset-summary,
+        .status {
+          flex: 1 1 100%;
+          min-width: 0;
+        }
+
+        .status {
+          justify-content: flex-start;
+        }
+      }
+
       @media (max-width: 768px) {
         .shell {
           height: auto;
@@ -880,11 +992,14 @@
           max-height: none;
         }
         .editor-panel {
-          min-height: 58vh;
+          min-height: auto;
         }
         .preview-panel {
           min-height: 38vh;
           max-height: 50vh;
+        }
+        .editor-wrap {
+          min-height: 18rem;
         }
         #editor {
           font-size: 0.78rem;
@@ -894,19 +1009,16 @@
           padding: 1rem;
         }
         .sidebar {
-          grid-template-columns: 1fr;
           padding: 1rem;
           gap: 0.6rem;
         }
         .actions {
           padding: 0.75rem 1rem;
-          flex-wrap: wrap;
         }
         .asset-summary {
-          max-width: 100%;
-          white-space: normal;
           flex-basis: 100%;
           order: 3;
+          min-width: 0;
         }
         .btn {
           font-size: 0.7rem;
@@ -914,6 +1026,9 @@
         }
         .panel-header {
           padding: 0.6rem 1rem;
+        }
+        .editor-toolbar {
+          padding: 0.7rem 1rem;
         }
         .ad-banner {
           padding: 0.4rem 0.5rem;
@@ -957,6 +1072,10 @@
           white-space: normal;
           text-align: center;
         }
+
+        .status {
+          margin-left: 0;
+        }
       }
 
       @media (max-width: 480px) {
@@ -971,6 +1090,9 @@
           gap: 0.6rem;
           font-size: 0.6rem;
         }
+        .toolbar-controls > .btn {
+          flex-basis: 100%;
+        }
         .content h1,
         .seo-content h1 {
           font-size: 1.15rem;
@@ -978,6 +1100,9 @@
         #editor {
           min-height: 200px;
           font-size: 0.75rem;
+        }
+        .editor-wrap {
+          min-height: 14rem;
         }
         .sidebar {
           padding: 0.75rem;
@@ -1022,63 +1147,57 @@
         </div>
       </div>
 
+      <div class="editor-toolbar" aria-label="Editor actions">
+        <div class="toolbar-controls">
+          <button
+            class="btn btn-ghost"
+            onclick="loadSample()"
+            title="Load sample"
+          >
+            sample
+          </button>
+          <button
+            class="btn btn-ghost"
+            onclick="loadImageSampleProject()"
+            title="Load sample with JPG, PNG, and SVG images"
+          >
+            image sample
+          </button>
+          <button class="btn btn-ghost" onclick="clearEditor()" title="Clear">
+            clear
+          </button>
+          <label class="btn btn-ghost file-trigger" title="Open .md file">
+            open .md
+            <input
+              type="file"
+              accept=".md,.txt,.markdown"
+              style="display: none"
+              onchange="loadFile(event)"
+            />
+          </label>
+          <label
+            class="btn btn-ghost file-trigger"
+            title="Open a folder with your Markdown file and images"
+          >
+            open folder
+            <input
+              type="file"
+              style="display: none"
+              multiple
+              webkitdirectory
+              directory
+              onchange="loadProjectFiles(event)"
+            />
+          </label>
+        </div>
+      </div>
+
       <main>
         <!-- LEFT: Editor -->
         <div class="panel editor-panel">
           <div class="panel-header">
             <div class="dot"></div>
             <span class="panel-label">Markdown</span>
-            <div style="margin-left: auto; display: flex; gap: 0.5rem">
-              <button
-                class="btn btn-ghost"
-                onclick="loadSample()"
-                title="Load sample"
-              >
-                sample
-              </button>
-              <button
-                class="btn btn-ghost"
-                onclick="loadImageSampleProject()"
-                title="Load sample with JPG, PNG, and SVG images"
-              >
-                image sample
-              </button>
-              <button
-                class="btn btn-ghost"
-                onclick="clearEditor()"
-                title="Clear"
-              >
-                clear
-              </button>
-              <label
-                class="btn btn-ghost"
-                style="cursor: pointer"
-                title="Open .md file"
-              >
-                open .md
-                <input
-                  type="file"
-                  accept=".md,.txt,.markdown"
-                  style="display: none"
-                  onchange="loadFile(event)"
-                />
-              </label>
-              <label
-                class="btn btn-ghost"
-                style="cursor: pointer"
-                title="Open a folder with your Markdown file and images"
-              >
-                open folder
-                <input
-                  type="file"
-                  style="display: none"
-                  multiple
-                  webkitdirectory
-                  directory
-                  onchange="loadProjectFiles(event)"
-                />
-              </label>
-            </div>
           </div>
 
           <div class="editor-wrap" id="editorWrap">
@@ -1095,43 +1214,6 @@ You can also drag and drop a .md file or a whole Markdown project folder.
 
 Start writing..."
             ></textarea>
-          </div>
-
-          <!-- Metadata -->
-          <div class="sidebar">
-            <div class="field">
-              <label>Title</label>
-              <input type="text" id="metaTitle" placeholder="Auto (from H1)" />
-            </div>
-            <div class="field">
-              <label>Author</label>
-              <input type="text" id="metaAuthor" placeholder="Unknown" />
-            </div>
-            <div class="field">
-              <label>Language</label>
-              <select id="metaLang">
-                <option value="en">English (en)</option>
-                <option value="pt">Português (pt)</option>
-                <option value="es">Español (es)</option>
-                <option value="fr">Français (fr)</option>
-                <option value="de">Deutsch (de)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Actions -->
-          <div class="actions">
-            <button
-              class="btn btn-primary"
-              id="downloadBtn"
-              onclick="generateEpub()"
-            >
-              ⬇ Generate EPUB
-            </button>
-            <div class="asset-summary" id="assetSummary">
-              No local assets loaded
-            </div>
-            <div class="status" id="status"></div>
           </div>
         </div>
 
@@ -1158,6 +1240,43 @@ Start writing..."
           </div>
         </div>
       </main>
+
+      <section class="options-panel" aria-label="EPUB options">
+        <div class="sidebar">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="metaTitle" placeholder="Auto (from H1)" />
+          </div>
+          <div class="field">
+            <label>Author</label>
+            <input type="text" id="metaAuthor" placeholder="Unknown" />
+          </div>
+          <div class="field">
+            <label>Language</label>
+            <select id="metaLang">
+              <option value="en">English (en)</option>
+              <option value="pt">Português (pt)</option>
+              <option value="es">Español (es)</option>
+              <option value="fr">Français (fr)</option>
+              <option value="de">Deutsch (de)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button
+            class="btn btn-primary"
+            id="downloadBtn"
+            onclick="generateEpub()"
+          >
+            ⬇ Generate EPUB
+          </button>
+          <div class="asset-summary" id="assetSummary">
+            No local assets loaded
+          </div>
+          <div class="status" id="status"></div>
+        </div>
+      </section>
 
       <footer>
         <div class="footer-top">
