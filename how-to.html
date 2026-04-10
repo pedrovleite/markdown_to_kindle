@@ -14,6 +14,38 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0e0e0f" />
+    <script>
+      (function () {
+        const key = "mdtoepub-theme";
+        let preference = "system";
+
+        try {
+          const storedPreference = window.localStorage.getItem(key);
+          if (
+            storedPreference === "light" ||
+            storedPreference === "dark" ||
+            storedPreference === "system"
+          ) {
+            preference = storedPreference;
+          }
+        } catch {
+          preference = "system";
+        }
+
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const resolvedTheme =
+          preference === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : preference;
+
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+      })();
+    </script>
     <link rel="canonical" href="https://mdtoepub.com/how-to.html" />
     <link
       rel="icon"
@@ -161,6 +193,10 @@
       }
       nav a:hover,
       nav a.active {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
         color: var(--accent);
       }
       nav .nav-spacer {
@@ -170,21 +206,33 @@
       .ad-banner {
         background: var(--surface);
         border-bottom: 1px solid var(--border);
-        padding: 0.5rem 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 0.75rem;
         min-height: 60px;
         position: relative;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        overflow: hidden;
       }
       .ad-banner .ad-slot {
         text-align: center;
         max-width: 728px;
         width: 100%;
-        min-height: 60px;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+      }
+
+      .ad-banner .ad-slot > * {
+        flex: 0 0 auto;
       }
       .ad-banner .ad-label {
         position: absolute;
@@ -312,7 +360,7 @@
         height: 2.2rem;
         border-radius: 50%;
         background: var(--accent);
-        color: #0e0e0f;
+        color: var(--accent-contrast);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -353,7 +401,7 @@
 
       .warning-box {
         background: var(--surface);
-        border: 1px solid #e87e7e;
+        border: 1px solid var(--danger);
         border-radius: var(--radius);
         padding: 1.25rem;
         margin: 1.5rem 0;
@@ -363,7 +411,7 @@
         font-size: 0.7rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
-        color: #e87e7e;
+        color: var(--danger);
         margin-bottom: 0.5rem;
       }
       .warning-box p {
@@ -414,7 +462,7 @@
       .cta-box a.btn {
         display: inline-block;
         background: var(--accent);
-        color: #0e0e0f;
+        color: var(--accent-contrast);
         padding: 0.7rem 1.5rem;
         border-radius: var(--radius);
         font-family: "JetBrains Mono", monospace;
@@ -602,6 +650,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="assets/theme.css" />
   </head>
   <body>
     <div class="shell">
@@ -1136,5 +1185,6 @@ This chapter continues the story...
         </div>
       </footer>
     </div>
+    <script src="assets/theme.js"></script>
   </body>
 </html>
