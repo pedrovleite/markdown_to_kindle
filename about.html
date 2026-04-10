@@ -10,6 +10,38 @@
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0e0e0f" />
+    <script>
+      (function () {
+        const key = "mdtoepub-theme";
+        let preference = "system";
+
+        try {
+          const storedPreference = window.localStorage.getItem(key);
+          if (
+            storedPreference === "light" ||
+            storedPreference === "dark" ||
+            storedPreference === "system"
+          ) {
+            preference = storedPreference;
+          }
+        } catch {
+          preference = "system";
+        }
+
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const resolvedTheme =
+          preference === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : preference;
+
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+      })();
+    </script>
     <link rel="canonical" href="https://mdtoepub.com/about.html" />
     <link
       rel="icon"
@@ -356,6 +388,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="assets/theme.css" />
   </head>
   <body>
     <div class="shell">
@@ -610,5 +643,6 @@
         </div>
       </footer>
     </div>
+    <script src="assets/theme.js"></script>
   </body>
 </html>

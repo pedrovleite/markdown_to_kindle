@@ -1,0 +1,143 @@
+:root {
+  --theme-color-dark: #0e0e0f;
+  --theme-color-light: #f5efe3;
+  --accent-contrast: #0e0e0f;
+  --focus-ring: rgba(126, 184, 232, 0.35);
+  --danger: #e87e7e;
+  --danger-border: #8f4c4c;
+  --danger-surface: rgba(232, 126, 126, 0.08);
+  --shadow-soft: 0 18px 48px rgba(14, 14, 15, 0.12);
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f5efe3;
+  --surface: #fffaf1;
+  --surface2: #efe4d2;
+  --border: #d7c8b3;
+  --accent: #9b6d1d;
+  --accent2: #216c97;
+  --accent-contrast: #fffaf1;
+  --text: #211b15;
+  --muted: #6e6254;
+  --success: #2f7b49;
+  --danger: #b44949;
+  --danger-border: #d7a6a6;
+  --danger-surface: rgba(180, 73, 73, 0.1);
+  --focus-ring: rgba(33, 108, 151, 0.18);
+  --shadow-soft: 0 18px 48px rgba(71, 53, 20, 0.08);
+  color-scheme: light;
+}
+
+html {
+  background: var(--bg);
+}
+
+body {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+summary {
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+summary:focus-visible,
+.theme-toggle:focus-visible,
+.theme-toggle-option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+.theme-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.theme-controls-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface2);
+  box-shadow: var(--shadow-soft);
+}
+
+.theme-toggle-option {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 0.42rem 0.75rem;
+  border-radius: 999px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.62rem;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.theme-toggle-option[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-weight: 700;
+}
+
+.theme-toggle-option:hover {
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .theme-controls {
+    margin-left: 0;
+    flex: 0 0 auto;
+  }
+
+  .theme-controls-label {
+    display: none;
+  }
+
+  .theme-toggle-option {
+    padding: 0.38rem 0.62rem;
+    font-size: 0.58rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary {
+    transition: none;
+  }
+}

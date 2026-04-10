@@ -17,6 +17,38 @@
     <meta name="author" content="Markdown to EPUB" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0e0e0f" />
+    <script>
+      (function () {
+        const key = "mdtoepub-theme";
+        let preference = "system";
+
+        try {
+          const storedPreference = window.localStorage.getItem(key);
+          if (
+            storedPreference === "light" ||
+            storedPreference === "dark" ||
+            storedPreference === "system"
+          ) {
+            preference = storedPreference;
+          }
+        } catch {
+          preference = "system";
+        }
+
+        const prefersDark =
+          window.matchMedia &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const resolvedTheme =
+          preference === "system"
+            ? prefersDark
+              ? "dark"
+              : "light"
+            : preference;
+
+        document.documentElement.dataset.themePreference = preference;
+        document.documentElement.dataset.theme = resolvedTheme;
+      })();
+    </script>
     <meta
       property="og:title"
       content="Markdown to EPUB Converter — Free Online Tool"
@@ -528,7 +560,7 @@
 
       .btn-primary {
         background: var(--accent);
-        color: #0e0e0f;
+        color: var(--accent-contrast);
         font-weight: 700;
       }
       .btn-primary:hover {
@@ -566,7 +598,7 @@
         color: var(--success);
       }
       .status.error {
-        color: #e87e7e;
+        color: var(--danger);
       }
 
       .asset-summary {
@@ -582,10 +614,10 @@
       .preview-asset-error {
         margin: 1em 0;
         padding: 0.75em 0.9em;
-        border: 1px solid #8f4c4c;
+        border: 1px solid var(--danger-border);
         border-radius: var(--radius);
-        background: rgba(232, 126, 126, 0.08);
-        color: #f0b0b0;
+        background: var(--danger-surface);
+        color: var(--danger);
         font-family: "JetBrains Mono", monospace;
         font-size: 0.75rem;
         line-height: 1.5;
@@ -619,8 +651,8 @@
         color: var(--success);
       }
       #toast.error {
-        border-color: #e87e7e;
-        color: #e87e7e;
+        border-color: var(--danger);
+        color: var(--danger);
       }
 
       footer {
@@ -955,6 +987,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="assets/theme.css" />
   </head>
   <body>
     <div class="shell">
@@ -2560,5 +2593,6 @@ ${htmlBody}
       updateAssetSummary();
       updatePreview();
     </script>
+    <script src="assets/theme.js"></script>
   </body>
 </html>
